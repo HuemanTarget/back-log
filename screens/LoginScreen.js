@@ -135,13 +135,14 @@ class LoginScreen extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signIn: (user) => dispatch({ type: "SIGN_IN", payload: user }),
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     signIn: (user) => dispatch({ type: "SIGN_IN", payload: user }),
+//   };
+// };
 
-export default connect(null, mapDispatchToProps)(LoginScreen);
+// export default connect(null, mapDispatchToProps)(LoginScreen);
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
