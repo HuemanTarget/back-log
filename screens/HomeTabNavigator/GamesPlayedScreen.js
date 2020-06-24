@@ -9,7 +9,6 @@ import {
 import colors from "../../assets/colors";
 import ListItem from "../../components/ListItem";
 import { connect } from "react-redux";
-import ListEmptyComponent from "../../components/ListEmptyComponent";
 
 class GamesPlayedScreen extends Component {
   renderItem = (item) => {

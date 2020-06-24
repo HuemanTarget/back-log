@@ -92,4 +92,3 @@ const games = (state = initialState, action) => {
 };
 
 export default games;
-bo;
