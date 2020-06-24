@@ -1,89 +1,89 @@
 const initialState = {
-  books: [],
-  booksReading: [],
-  booksRead: [],
-  isLoadingBooks: true,
+  games: [],
+  gamesPlaying: [],
+  gamesPlayer: [],
+  isLoadingGames: true,
   image: null,
 };
 
-const books = (state = initialState, action) => {
+const games = (state = initialState, action) => {
   switch (action.type) {
-    case "LOAD_BOOKS_FROM_SERVER":
+    case "LOAD_GAMES_FROM_SERVER":
       return {
         ...state,
-        books: action.payload,
-        booksReading: action.payload.filter((book) => !book.read),
-        booksRead: action.payload.filter((book) => book.read),
+        games: action.payload,
+        gamesPlaying: action.payload.filter((game) => !game.played),
+        gamesPlayed: action.payload.filter((game) => games.played),
       };
-    case "ADD_BOOK":
+    case "ADD_GAME":
       return {
         ...state,
-        books: [action.payload, ...state.books],
-        booksReading: [action.payload, ...state.booksReading],
+        games: [action.payload, ...state.games],
+        gamesPlaying: [action.payload, ...state.gamesPlaying],
       };
-    case "MARK_BOOK_AS_READ":
+    case "MARK_GAME_AS_PLAYED":
       return {
         ...state,
-        books: state.books.map((book) => {
-          if (book.name == action.payload.name) {
-            return { ...book, read: true };
+        games: state.games.map((game) => {
+          if (game.name == action.payload.name) {
+            return { ...game, played: true };
           }
-          return book;
+          return game;
         }),
-        booksRead: [...state.booksRead, action.payload],
-        booksReading: state.booksReading.filter(
-          (book) => book.name !== action.payload.name
+        gamesPlayed: [...state.gamesPlayed, action.payload],
+        gamesPlaying: state.gamesPlaying.filter(
+          (game) => game.name !== action.payload.name
         ),
       };
-    case "TOGGLE_IS_LOADING_BOOKS":
+    case "TOGGLE_IS_LOADING_GAMES":
       return {
         ...state,
-        isLoadingBooks: action.payload,
+        isLoadingGames: action.payload,
       };
-    case "MARK_BOOK_AS_UNREAD":
+    case "MARK_GAME_AS_UNPLAYED":
       return {
         ...state,
-        books: state.books.map((book) => {
-          if (book.name == action.payload.name) {
-            return { ...book, read: false };
+        games: state.games.map((game) => {
+          if (game.name == action.payload.name) {
+            return { ...game, read: false };
           }
-          return book;
+          return game;
         }),
-        booksRead: state.booksRead.filter(
-          (book) => book.name !== action.payload.name
+        gamesPlayed: state.gamesPlayed.filter(
+          (game) => game.name !== action.payload.name
         ),
-        booksReading: [...state.booksReading, action.payload],
+        gamesPlaying: [...state.gamesPlaying, action.payload],
       };
-    case "DELETE_BOOK":
+    case "DELETE_GAME":
       return {
-        books: state.books.filter((book) => book.name != action.payload.name),
-        booksRead: state.booksRead.filter(
-          (book) => book.name != action.payload.name
+        games: state.games.filter((game) => game.name != action.payload.name),
+        gamesPlayed: state.gamesPlayed.filter(
+          (game) => game.name != action.payload.name
         ),
-        booksReading: state.booksReading.filter(
-          (book) => book.name != action.payload.name
+        gamesPlaying: state.gamesPlaying.filter(
+          (game) => game.name != action.payload.name
         ),
       };
-    case "UPDATE_BOOK_IMAGE":
+    case "UPDATE_GAME_IMAGE":
       return {
         ...state,
-        books: state.books.map((book) => {
-          if (book.name == action.payload.name) {
-            return { ...book, image: action.payload.uri };
+        games: state.games.map((game) => {
+          if (game.name == action.payload.name) {
+            return { ...game, image: action.payload.uri };
           }
-          return book;
+          return game;
         }),
-        booksReading: state.booksReading.map((book) => {
-          if (book.name == action.payload.name) {
-            return { ...book, image: action.payload.uri };
+        gamesPlaying: state.gamesPlaying.map((game) => {
+          if (game.name == action.payload.name) {
+            return { ...game, image: action.payload.uri };
           }
-          return book;
+          return game;
         }),
-        booksRead: state.booksRead.map((book) => {
-          if (book.name == action.payload.name) {
-            return { ...book, image: action.payload.uri };
+        gamesPlayed: state.gamesPlayed.map((game) => {
+          if (game.name == action.payload.name) {
+            return { ...game, image: action.payload.uri };
           }
-          return book;
+          return game;
         }),
       };
     default:
@@ -91,4 +91,5 @@ const books = (state = initialState, action) => {
   }
 };
 
-export default books;
+export default games;
+bo;

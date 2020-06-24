@@ -30,7 +30,7 @@ class CustomDrawerComponent extends Component {
         >
           <Ionicons name="ios-bookmarks" size={100} color={colors.logoColor} />
           <Text style={{ fontSize: 24, color: "white", fontWeight: "100" }}>
-            Book Worm
+            Back Log
           </Text>
         </View>
         <DrawerItems {...this.props} />

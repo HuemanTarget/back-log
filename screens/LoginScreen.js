@@ -61,14 +61,12 @@ class LoginScreen extends Component {
           );
         if (response) {
           this.setState({ isLoading: false });
-          //sign in the user
           const user = await firebase
             .database()
             .ref("users/")
             .child(response.user.uid)
             .set({ email: response.user.email, uid: response.user.uid });
           this.props.navigation.navigate("LoadingScreen");
-          // this.onSignIn(this.state.email, this.state.password);
         }
       } catch (error) {
         this.setState({ isLoading: false });

@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 const GamesCountContainer = ({ color, type, ...props }) => (
   <View>
-    <Text style={{ color: color }}>{props.books[type].length || 0}</Text>
+    <Text style={{ color: color }}>{props.games[type].length || 0}</Text>
   </View>
 );
 
