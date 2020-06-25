@@ -105,12 +105,16 @@ const HomeTabNavigator = () => (
           case "GamesPlaying":
             return <GamesCountCountainer color={color} type="gamesPlaying" />;
           case "GamesPlayed":
-            return <GamesCountCountainer color={color} type="gamesPlayed" />;
+            return <GamesCountCountainer color={color} type="gamesPlaying" />;
         }
       },
     })}
   >
-    <Tab.Screen name="Games" component={HomeScreen} />
+    <Tab.Screen
+      options={{ tabBarLabel: "Total Games" }}
+      name="Games"
+      component={HomeScreen}
+    />
     <Tab.Screen
       options={{ tabBarLabel: "Games Playing" }}
       name="GamesPlaying"
