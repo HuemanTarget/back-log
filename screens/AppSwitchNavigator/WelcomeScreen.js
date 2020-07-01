@@ -17,9 +17,23 @@ const WelcomeScreen = () => {
           justifyContent: "center",
         }}
       >
-        <Ionicons name="logo-game-controller-b" size={150} color={colors.logoColor} />
-        <Text style={{ fontSize: 50, fontWeight: "100", color: "white" }}>
+        <Ionicons
+          name="logo-game-controller-b"
+          size={150}
+          color={colors.logoColor}
+        />
+        <Text style={{ fontSize: 50, fontWeight: "400", color: "white" }}>
           Back Log
+        </Text>
+        <Text
+          style={{
+            fontSize: 15,
+            fontWeight: "250",
+            color: "white",
+            marginTop: 10,
+          }}
+        >
+          A Place To Keep Track Of Your Video Game Library
         </Text>
       </View>
       <View
@@ -39,7 +53,7 @@ const WelcomeScreen = () => {
           }}
           onPress={() => navigation.navigate("LoginScreen")}
         >
-          <Text style={{ fontWeight: "100", color: "white" }}>Login</Text>
+          <Text style={{ fontWeight: "600", color: "white" }}>Login</Text>
         </CustomActionButton>
       </View>
     </View>

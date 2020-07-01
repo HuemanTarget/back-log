@@ -31,7 +31,7 @@ const LogoutScreen = () => {
         title="Signup"
         onPress={handleSignOut}
       >
-        <Text style={{ fontWeight: "100", color: "white" }}>Log Out</Text>
+        <Text style={{ fontWeight: "500", color: "white" }}>Log Out</Text>
       </CustomActionButton>
     </View>
   );

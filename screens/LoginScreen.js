@@ -105,7 +105,7 @@ const LoginScreen = () => {
         />
         <TextInput
           style={styles.textInput}
-          placeholder="enter password"
+          placeholder="enter password [8 letters - numbers long]"
           placeholderTextColor="#b6b6b6"
           secureTextEntry
           onChangeText={(password) => setPassWord(password)}
@@ -115,13 +115,13 @@ const LoginScreen = () => {
             onPress={onSignIn}
             style={[styles.loginButtons, { borderColor: colors.bgPrimary }]}
           >
-            <Text style={{ color: "white" }}>Login</Text>
+            <Text style={{ color: "white", fontWeight: '600' }}>Login</Text>
           </CustomActionButton>
           <CustomActionButton
             onPress={onSignUp}
             style={[styles.loginButtons, { borderColor: colors.bgError }]}
           >
-            <Text style={{ color: "white" }}>Sign Up</Text>
+            <Text style={{ color: "white", fontWeight: '600' }}>Sign Up</Text>
           </CustomActionButton>
         </View>
       </View>
