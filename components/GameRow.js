@@ -166,14 +166,14 @@ const GameRow = ({ item, index }) => {
     },
   ];
 
-  if (!item.read) {
+  if (!item.completed) {
     swipeoutButtons.unshift({
       text: "Mark Completed",
       component: (
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <Text style={{ color: colors.txtWhite }}>Mark Completed</Text>
+          <Text style={{ color: colors.txtWhite }}>Mark As Completed</Text>
         </View>
       ),
       backgroundColor: colors.bgSuccessDark,
@@ -186,7 +186,7 @@ const GameRow = ({ item, index }) => {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <Text style={{ color: colors.txtWhite }}>Mark Unplayed</Text>
+          <Text style={{ color: colors.txtWhite }}>Mark As Unplayed</Text>
         </View>
       ),
       backgroundColor: colors.bgUnread,
@@ -207,7 +207,7 @@ const GameRow = ({ item, index }) => {
         marginVertical={0}
         item={item}
       >
-        {item.read && (
+        {item.completed && (
           <Ionicons
             style={{ marginRight: 10 }}
             name="ios-checkmark"
