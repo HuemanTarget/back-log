@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-
 import { connect } from "react-redux";
 import colors from "../../assets/colors";
 import PropTypes from "prop-types";

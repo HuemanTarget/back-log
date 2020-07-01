@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,37 +11,39 @@ import CustomActionButton from "../components/CustomActionButton";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
-class LoginScreen extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-      isLoading: false,
-    };
-  }
+const LoginScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassWord] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  onSignIn = async () => {
-    if (this.state.email && this.state.password) {
-      this.setState({ isLoading: true });
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const onSignIn = async () => {
+    if (email && password) {
+      setIsLoading(true);
       try {
         const response = await firebase
           .auth()
-          .signInWithEmailAndPassword(this.state.email, this.state.password);
+          .signInWithEmailAndPassword(email, password);
         if (response) {
-          this.setState({ isLoading: false });
-          this.props.signIn(response.user);
+          setIsLoading(false);
+          dispatch({ type: "SIGN_IN", payload: response.user });
         }
       } catch (error) {
-        this.setState({ isLoading: false });
+        setIsLoading(false);
         switch (error.code) {
           case "auth/user-not-found":
             alert("A user with that email does not exist. Try signing up.");
             break;
           case "auth/invalid-email":
             alert("Please enter a valid email address");
+            break;
+          default:
+            alert(error.code);
         }
       }
     } else {
@@ -49,27 +51,24 @@ class LoginScreen extends Component {
     }
   };
 
-  onSignUp = async () => {
-    if (this.state.email && this.state.password) {
-      this.setState({ isLoading: true });
+  const onSignUp = async () => {
+    if (email && password) {
+      setIsLoading(true);
       try {
         const response = await firebase
           .auth()
-          .createUserWithEmailAndPassword(
-            this.state.email,
-            this.state.password
-          );
+          .createUserWithEmailAndPassword(email, password);
         if (response) {
-          this.setState({ isLoading: false });
+          setIsLoading(false);
           const user = await firebase
             .database()
             .ref("users/")
             .child(response.user.uid)
             .set({ email: response.user.email, uid: response.user.uid });
-          this.props.navigation.navigate("LoadingScreen");
+          dispatch({ type: "SIGN_IN", payload: response.user });
         }
       } catch (error) {
-        this.setState({ isLoading: false });
+        setIsLoading(false);
         if (error.code == "auth/email-already-in-use") {
           alert("User already exists. Try logging in.");
         }
@@ -79,67 +78,59 @@ class LoginScreen extends Component {
     }
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        {this.state.isLoading ? (
-          <View
-            style={[
-              StyleSheet.absoluteFill,
-              {
-                alignItems: "center",
-                justifyContent: "center",
-                zIndex: 1000,
-                elevation: 1000,
-              },
-            ]}
-          >
-            <ActivityIndicator size="large" color={colors.logoColor} />
-          </View>
-        ) : null}
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="abc@example.com"
-            placeholderTextColor="#b6b6b6"
-            keyboardType="email-address"
-            onChangeText={(email) => this.setState({ email })}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="enter password"
-            placeholderTextColor="#b6b6b6"
-            secureTextEntry
-            onChangeText={(password) => this.setState({ password })}
-          />
-          <View style={{ alignItems: "center" }}>
-            <CustomActionButton
-              onPress={this.onSignIn}
-              style={[styles.loginButtons, { borderColor: colors.bgPrimary }]}
-            >
-              <Text style={{ color: "white" }}>Login</Text>
-            </CustomActionButton>
-            <CustomActionButton
-              onPress={this.onSignUp}
-              style={[styles.loginButtons, { borderColor: colors.bgError }]}
-            >
-              <Text style={{ color: "white" }}>Sign Up</Text>
-            </CustomActionButton>
-          </View>
+  return (
+    <View style={styles.container}>
+      {isLoading ? (
+        <View
+          style={[
+            StyleSheet.absoluteFill,
+            {
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 1000,
+              elevation: 1000,
+            },
+          ]}
+        >
+          <ActivityIndicator size="large" color={colors.logoColor} />
         </View>
-        <View style={{ flex: 1 }} />
+      ) : null}
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="abc@example.com"
+          placeholderTextColor="#b6b6b6"
+          keyboardType="email-address"
+          onChangeText={(email) => setEmail(email)}
+        />
+        <TextInput
+          style={styles.textInput}
+          placeholder="enter password"
+          placeholderTextColor="#b6b6b6"
+          secureTextEntry
+          onChangeText={(password) => setPassWord(password)}
+        />
+        <View style={{ alignItems: "center" }}>
+          <CustomActionButton
+            onPress={onSignIn}
+            style={[styles.loginButtons, { borderColor: colors.bgPrimary }]}
+          >
+            <Text style={{ color: "white" }}>Login</Text>
+          </CustomActionButton>
+          <CustomActionButton
+            onPress={onSignUp}
+            style={[styles.loginButtons, { borderColor: colors.bgError }]}
+          >
+            <Text style={{ color: "white" }}>Sign Up</Text>
+          </CustomActionButton>
+        </View>
       </View>
-    );
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signIn: (user) => dispatch({ type: "SIGN_IN", payload: user }),
-  };
+      <View style={{ flex: 1 }} />
+    </View>
+  );
 };
 
-export default connect(null, mapDispatchToProps)(LoginScreen);
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {

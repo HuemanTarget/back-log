@@ -1,92 +1,69 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 
 import WelcomeScreen from "./screens/AppSwitchNavigator/WelcomeScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
-import SettingsScreen from "./screens/SettingsScreen";
-import LoadingScreen from "./screens/AppSwitchNavigator/LoadingScreen";
+import LogoutScreen from "./screens/LogoutScreen";
 import GamesPlayingScreen from "./screens/HomeTabNavigator/GamesPlayingScreen";
-import GamesPlayedScreen from "./screens/HomeTabNavigator/GamesPlayedScreen";
+import GamesCompletedScreen from "./screens/HomeTabNavigator/GamesCompletedScreen";
 import CustomDrawerComponent from "./screens/DrawerNavigator/CustomDrawerComponent";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StackActions } from "react-navigation";
 import colors from "./assets/colors";
-
-import * as firebase from "firebase/app";
 import "firebase/auth";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import SplashScreen from "./screens/SplashScreen";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
-import GamesCountCountainer from "./redux/containers/GamesCountContainer";
+import GamesCountCountainer from "./redux/containers/GamesCountCountainer";
 import { Ionicons } from "@expo/vector-icons";
+import useAuthenticateUser from "./hooks/useAuthenticateUser";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-class BackLog extends Component {
-  componentDidMount() {
-    this.checkIfLoggedIn();
+const BackLog = () => {
+  useAuthenticateUser();
+
+  const auth = useSelector((state) => state.auth);
+
+  if (auth.isLoading) {
+    return <SplashScreen />;
   }
 
-  checkIfLoggedIn = () => {
-    let unsubscribe;
-    try {
-      unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          this.props.signIn(user);
-        } else {
-          console.log("No User Signed In");
-          this.props.signOut();
-        }
-        unsubscribe();
-      });
-    } catch (error) {
-      console.log(error);
-      this.props.signOut();
-    }
-  };
-
-  render() {
-    if (this.props.auth.isLoading) {
-      return <SplashScreen />;
-    }
-
-    return (
-      <NavigationContainer>
-        {!this.props.auth.isSignedIn ? (
-          <Stack.Navigator
-            screenOptions={{
-              headerStyle: {
-                backgroundColor: colors.bgMain,
-              },
-            }}
-          >
-            <Stack.Screen
-              name="WelcomeScreen"
-              component={WelcomeScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="LoginScreen"
-              component={LoginScreen}
-              options={{ headerBackTitleVisible: false }}
-            />
-          </Stack.Navigator>
-        ) : (
-          <ActionSheetProvider>
-            <AppDrawerNavigator />
-          </ActionSheetProvider>
-        )}
-      </NavigationContainer>
-    );
-  }
-}
+  return (
+    <NavigationContainer>
+      {!auth.isSignedIn ? (
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: colors.bgMain,
+            },
+            headerTintColor: "white",
+          }}
+        >
+          <Stack.Screen
+            name="WelcomeScreen"
+            component={WelcomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="LoginScreen"
+            component={LoginScreen}
+            options={{ headerBackTitleVisible: false }}
+          />
+        </Stack.Navigator>
+      ) : (
+        <ActionSheetProvider>
+          <AppDrawerNavigator />
+        </ActionSheetProvider>
+      )}
+    </NavigationContainer>
+  );
+};
 
 const HomeTabNavigator = () => (
   <Tab.Navigator
@@ -104,17 +81,13 @@ const HomeTabNavigator = () => (
             return <GamesCountCountainer color={color} type="games" />;
           case "GamesPlaying":
             return <GamesCountCountainer color={color} type="gamesPlaying" />;
-          case "GamesPlayed":
-            return <GamesCountCountainer color={color} type="gamesPlaying" />;
+          case "GamesCompleted":
+            return <GamesCountCountainer color={color} type="gamesCompleted" />;
         }
       },
     })}
   >
-    <Tab.Screen
-      options={{ tabBarLabel: "Total Games" }}
-      name="Games"
-      component={HomeScreen}
-    />
+    <Tab.Screen name="Games" component={HomeScreen} />
     <Tab.Screen
       options={{ tabBarLabel: "Games Playing" }}
       name="GamesPlaying"
@@ -122,11 +95,26 @@ const HomeTabNavigator = () => (
     />
     <Tab.Screen
       options={{ tabBarLabel: "Games Completed" }}
-      name="GamesPlayed"
-      component={GamesPlayedScreen}
+      name="GamesCompleted"
+      component={GamesCompletedScreen}
     />
   </Tab.Navigator>
 );
+
+const getHeaderTitle = (route) => {
+  const routeName = route.state
+    ? route.state.routes[route.state.index].name
+    : "Home";
+
+  switch (routeName) {
+    case "Home":
+      return "Games Library";
+    case "GamesPlaying":
+      return "Games Playing";
+    case "GamesCompleted":
+      return "Games Completed";
+  }
+};
 
 const HomeStackNavigator = ({ navigation }) => (
   <Stack.Navigator
@@ -144,31 +132,34 @@ const HomeStackNavigator = ({ navigation }) => (
       ),
     }}
   >
-    <Stack.Screen name="Home Tab Navigator" component={HomeTabNavigator} />
+    <Stack.Screen
+      options={({ route }) => ({
+        title: getHeaderTitle(route),
+      })}
+      name="Games"
+      component={HomeTabNavigator}
+    />
   </Stack.Navigator>
 );
 
 const AppDrawerNavigator = () => (
-  <Drawer.Navigator>
-    <Drawer.Screen name="Home" component={HomeStackNavigator} />
-    <Drawer.Screen name="Settings" component={SettingsScreen} />
+  <Drawer.Navigator
+    drawerContent={(props) => <CustomDrawerComponent {...props} />}
+  >
+    <Drawer.Screen
+      options={{ drawerIcon: () => <Ionicons name="ios-home" size={24} /> }}
+      name="Home"
+      component={HomeStackNavigator}
+    />
+    <Drawer.Screen
+      options={{ drawerIcon: () => <Ionicons name="ios-log-out" size={24} /> }}
+      name="Log Out"
+      component={LogoutScreen}
+    />
   </Drawer.Navigator>
 );
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signIn: (user) => dispatch({ type: "SIGN_IN", payload: user }),
-    signOut: () => dispatch({ type: "SIGN_OUT" }),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BackLog);
+export default BackLog;
 
 const styles = StyleSheet.create({
   container: {

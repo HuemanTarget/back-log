@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-
+import React from "react";
 import {
   View,
   Text,
@@ -8,36 +7,36 @@ import {
   SafeAreaView,
   Platform,
 } from "react-native";
-
 import colors from "../../assets/colors";
 import { Ionicons } from "@expo/vector-icons";
+import { DrawerItemList } from "@react-navigation/drawer";
 
-import { DrawerItems } from "react-navigation";
-
-class CustomDrawerComponent extends Component {
-  render() {
-    return (
-      <ScrollView>
-        <SafeAreaView style={{ backgroundColor: colors.bgMain }} />
-        <View
-          style={{
-            height: 150,
-            backgroundColor: colors.bgMain,
-            alignItems: "center",
-            justifyContent: "center",
-            paddingTop: Platform.OS == "android" ? 20 : 0,
-          }}
-        >
-          <Ionicons name="ios-bookmarks" size={100} color={colors.logoColor} />
-          <Text style={{ fontSize: 24, color: "white", fontWeight: "100" }}>
-            Back Log
-          </Text>
-        </View>
-        <DrawerItems {...this.props} />
-      </ScrollView>
-    );
-  }
-}
+const CustomDrawerComponent = (props) => {
+  return (
+    <ScrollView>
+      <SafeAreaView style={{ backgroundColor: colors.bgMain }} />
+      <View
+        style={{
+          height: 150,
+          backgroundColor: colors.bgMain,
+          alignItems: "center",
+          justifyContent: "center",
+          paddingTop: Platform.OS == "android" ? 20 : 0,
+        }}
+      >
+        <Ionicons
+          name="logo-game-controller-b"
+          size={100}
+          color={colors.logoColor}
+        />
+        <Text style={{ fontSize: 24, color: "white", fontWeight: "100" }}>
+          Back Log
+        </Text>
+      </View>
+      <DrawerItemList {...props} />
+    </ScrollView>
+  );
+};
 
 export default CustomDrawerComponent;
 

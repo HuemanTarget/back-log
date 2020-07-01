@@ -1,11 +1,12 @@
 import { createStore, combineReducers } from "redux";
-import GamesReducer from "../reducers/GamesReducer";
-import AuthReducer from "../reducers/AuthReducer";
+
+import gamesReducer from "../reducers/GamesReducer";
+import authReducer from "../reducers/authReducer";
 
 const store = createStore(
   combineReducers({
-    games: GamesReducer,
-    auth: AuthReducer,
+    games: gamesReducer,
+    auth: authReducer,
   })
 );
 

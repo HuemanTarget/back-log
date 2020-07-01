@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import colors from "../../assets/colors";

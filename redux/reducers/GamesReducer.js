@@ -1,7 +1,7 @@
 const initialState = {
   games: [],
   gamesPlaying: [],
-  gamesPlayer: [],
+  gamesCompleted: [],
   isLoadingGames: true,
   image: null,
 };
@@ -12,8 +12,8 @@ const games = (state = initialState, action) => {
       return {
         ...state,
         games: action.payload,
-        gamesPlaying: action.payload.filter((game) => !game.played),
-        gamesPlayed: action.payload.filter((game) => games.played),
+        gamesPlaying: action.payload.filter((game) => !game.completed),
+        gamesCompleted: action.payload.filter((game) => game.completed),
       };
     case "ADD_GAME":
       return {
@@ -21,16 +21,16 @@ const games = (state = initialState, action) => {
         games: [action.payload, ...state.games],
         gamesPlaying: [action.payload, ...state.gamesPlaying],
       };
-    case "MARK_GAME_AS_PLAYED":
+    case "MARK_GAME_AS_COMPLETED":
       return {
         ...state,
         games: state.games.map((game) => {
           if (game.name == action.payload.name) {
-            return { ...game, played: true };
+            return { ...game, completed: true };
           }
           return game;
         }),
-        gamesPlayed: [...state.gamesPlayed, action.payload],
+        gamesCompleted: [...state.gamesCompleted, action.payload],
         gamesPlaying: state.gamesPlaying.filter(
           (game) => game.name !== action.payload.name
         ),
@@ -45,11 +45,11 @@ const games = (state = initialState, action) => {
         ...state,
         games: state.games.map((game) => {
           if (game.name == action.payload.name) {
-            return { ...game, read: false };
+            return { ...game, completed: false };
           }
           return game;
         }),
-        gamesPlayed: state.gamesPlayed.filter(
+        gamesCompleted: state.gamesCompleted.filter(
           (game) => game.name !== action.payload.name
         ),
         gamesPlaying: [...state.gamesPlaying, action.payload],
@@ -57,7 +57,7 @@ const games = (state = initialState, action) => {
     case "DELETE_GAME":
       return {
         games: state.games.filter((game) => game.name != action.payload.name),
-        gamesPlayed: state.gamesPlayed.filter(
+        gamesCompleted: state.gamesCompleted.filter(
           (game) => game.name != action.payload.name
         ),
         gamesPlaying: state.gamesPlaying.filter(
@@ -79,7 +79,7 @@ const games = (state = initialState, action) => {
           }
           return game;
         }),
-        gamesPlayed: state.gamesPlayed.map((game) => {
+        gamesCompleted: state.gamesCompleted.map((game) => {
           if (game.name == action.payload.name) {
             return { ...game, image: action.payload.uri };
           }

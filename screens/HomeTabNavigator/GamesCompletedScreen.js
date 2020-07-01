@@ -6,12 +6,14 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
+import { useSelector } from "react-redux";
 import colors from "../../assets/colors";
 import ListItem from "../../components/ListItem";
-import { useSelector } from "react-redux";
 
-const GamesPlayingScreen = () => {
-  const { isLoadingGames, gamesPlaying } = useSelector((state) => state.games);
+const GamesCompletedScreen = () => {
+  const { isLoadingGames, gamesCompleted } = useSelector(
+    (state) => state.games
+  );
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.bgMain }}>
@@ -29,14 +31,14 @@ const GamesPlayingScreen = () => {
         </View>
       )}
       <FlatList
-        data={gamesPlaying}
+        data={gamesCompleted}
         renderItem={({ item }, index) => <ListItem item={item} index={index} />}
         keyExtractor={(item, index) => index.toString()}
         ListEmptyComponent={
           !isLoadingGames && (
             <View style={{ marginTop: 50, alignItems: "center" }}>
               <Text style={{ fontWeight: "bold", color: colors.txtWhite }}>
-                You Are Currently Not Playing Any Games
+                You Haven't Completed Any Games
               </Text>
             </View>
           )
@@ -46,4 +48,12 @@ const GamesPlayingScreen = () => {
   );
 };
 
-export default GamesPlayingScreen;
+export default GamesCompletedScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

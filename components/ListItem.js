@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import NetworkImage from "react-native-image-progress";
-import * as Progress from "react-native-progress";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 import colors from "../assets/colors";
