@@ -125,7 +125,7 @@ const HomeScreen = () => {
           ListEmptyComponent={
             !isLoadingGames && (
               <View style={{ marginTop: 50, alignItems: "center" }}>
-                <Text style={{ fontWeight: "bold", color: colors.txtWhite }}>
+                <Text style={{ fontWeight: "bold", color: 'colors.txtWhite' }}>
                   No Games In Library
                 </Text>
               </View>

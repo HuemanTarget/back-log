@@ -209,9 +209,9 @@ const GameRow = ({ item, index }) => {
       >
         {item.completed && (
           <Ionicons
-            style={{ marginRight: 10 }}
+            style={{ marginRight: 20 }}
             name="ios-checkmark"
-            color={colors.logoColor}
+            color={"#45CE30"}
             size={30}
           />
         )}

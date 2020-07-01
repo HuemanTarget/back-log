@@ -6,13 +6,13 @@ const colors = {
   bgTextInputDark: "#b6b6b6",
   txtPlaceholder: "#466575",
   borderColor: "#e9e9e9",
-  logoColor: "#bada55",
-  bgMain: "#2e424d",
+  logoColor: "#4BCFFA",
+  bgMain: "#192A56",
   txtWhite: "white",
-  listItemBg: "#354D58DA",
-  bgDelete: "#6E3C3CDA",
-  bgUnread: "#436E81",
-  bgSuccessDark: "#3C6E47DA",
+  listItemBg: "#4834DF",
+  bgDelete: "#BA2F16",
+  bgUnread: "#30336B",
+  bgSuccessDark: "#019031",
 };
 
 export default colors;

@@ -56,7 +56,7 @@ const ListItem = ({ item, children, marginVertical, editable, onPress }) => (
         paddingLeft: 5,
       }}
     >
-      <Text style={{ fontWeight: "100", fontSize: 22, color: colors.txtWhite }}>
+      <Text style={{ fontSize: 22, color: "#EAF0F1", fontWeight: 'bold', marginLeft: 10  }}>
         {item.name}
       </Text>
     </View>
