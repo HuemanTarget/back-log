@@ -22,18 +22,28 @@ const WelcomeScreen = () => {
           size={150}
           color={colors.logoColor}
         />
-        <Text style={{ fontSize: 50, fontWeight: "400", color: "white" }}>
+        <Text style={{ fontSize: 50, fontWeight: "500", color: "white", marginBottom: 10 }}>
           Back Log
         </Text>
         <Text
           style={{
             fontSize: 15,
-            fontWeight: "250",
+            fontWeight: "300",
+            color: "white",
+            marginTop: 0,
+          }}
+        >
+          A Simple Place To Keep Track
+        </Text>
+        <Text
+          style={{
+            fontSize: 15,
+            fontWeight: "300",
             color: "white",
             marginTop: 10,
           }}
         >
-          A Place To Keep Track Of Your Video Game Library
+          Of Your Video Game Library
         </Text>
       </View>
       <View

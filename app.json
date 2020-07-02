@@ -2,11 +2,7 @@
   "expo": {
     "name": "back-log",
     "slug": "back-log",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,11 +14,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "example.expo.googlesignin",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.62153348249-vc5p4ntjbp5cnm6ata1al428gut1vosk"
+        }
+      }
     }
   }
 }

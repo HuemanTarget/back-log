@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   ActivityIndicator,
+  Button,
 } from "react-native";
 import colors from "../assets/colors";
 import CustomActionButton from "../components/CustomActionButton";
@@ -13,6 +14,10 @@ import "firebase/auth";
 import "firebase/database";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import * as Google from "expo-google-app-auth";
+
+const IOS_CLIENT_ID =
+  
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -78,6 +83,28 @@ const LoginScreen = () => {
     }
   };
 
+  const signInWithGoogle = async () => {
+    try {
+      const result = await Google.logInAsync({
+        iosClientId: IOS_CLIENT_ID,
+        // androidClientId: ANDROID_CLIENT_ID,
+        scopes: ["profile", "email"],
+      });
+
+      if (result.type === "success") {
+        console.log("LoginScreen.js.js 21 | ", result.user.givenName);
+        // dispatch({ type: "SIGN_IN", payload: result.user });
+        //after Google login redirect to Profile
+        return result.accessToken;
+      } else {
+        return { cancelled: true };
+      }
+    } catch (e) {
+      console.log("LoginScreen.js.js 30 | Error with login", e);
+      return { error: true };
+    }
+  };
+
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -115,14 +142,23 @@ const LoginScreen = () => {
             onPress={onSignIn}
             style={[styles.loginButtons, { borderColor: colors.bgPrimary }]}
           >
-            <Text style={{ color: "white", fontWeight: '600' }}>Login</Text>
+            <Text style={{ color: "white", fontWeight: "600" }}>Login</Text>
           </CustomActionButton>
           <CustomActionButton
             onPress={onSignUp}
             style={[styles.loginButtons, { borderColor: colors.bgError }]}
           >
-            <Text style={{ color: "white", fontWeight: '600' }}>Sign Up</Text>
+            <Text style={{ color: "white", fontWeight: "600" }}>Sign Up</Text>
           </CustomActionButton>
+          {/* <CustomActionButton
+            onPress={signInWithGoogleAsync}
+            style={[styles.loginButtons, { borderColor: colors.bgError }]}
+          >
+            <Text style={{ color: "white", fontWeight: "600" }}>
+              Sign In With Google
+            </Text>
+          </CustomActionButton> */}
+          <Button title="Sign In With Google" onPress={signInWithGoogle} />
         </View>
       </View>
       <View style={{ flex: 1 }} />
