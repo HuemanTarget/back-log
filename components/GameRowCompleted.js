@@ -16,7 +16,7 @@ import {
   toggleIsLoadingGames,
   deleteGame,
   markGameAsCompleted,
-  markGameAsUnplayed,
+  // markGameAsUnplayed,
   updateGameImage,
 } from "../redux/actions";
 
@@ -27,23 +27,23 @@ const GameRow = ({ item, index }) => {
 
   const { showActionSheetWithOptions } = useActionSheet();
 
-  const markAsCompleted = async (selectedGame, index) => {
-    try {
-      dispatch(toggleIsLoadingGames(true));
-      await firebase
-        .database()
-        .ref("games")
-        .child(currentUser.uid)
-        .child(selectedGame.key)
-        .update({ completed: true });
+  // const markAsCompleted = async (selectedGame, index) => {
+  //   try {
+  //     dispatch(toggleIsLoadingGames(true));
+  //     await firebase
+  //       .database()
+  //       .ref("games")
+  //       .child(currentUser.uid)
+  //       .child(selectedGame.key)
+  //       .update({ completed: true });
 
-      dispatch(markGameAsCompleted(selectedGame));
-      dispatch(toggleIsLoadingGames(false));
-    } catch (error) {
-      console.log(error);
-      dispatch(toggleIsLoadingGames(false));
-    }
-  };
+  //     dispatch(markGameAsCompleted(selectedGame));
+  //     dispatch(toggleIsLoadingGames(false));
+  //   } catch (error) {
+  //     console.log(error);
+  //     dispatch(toggleIsLoadingGames(false));
+  //   }
+  // };
 
   const markAsUnplayed = async (selectedGame, index) => {
     try {
@@ -62,7 +62,7 @@ const GameRow = ({ item, index }) => {
     }
   };
 
-  const handleDeleteGame = async (selectedGame, index) => {
+  const markAsPlatinum = async (selectedGame, index) => {
     try {
       dispatch(toggleIsLoadingGames(true));
       await firebase
@@ -70,15 +70,49 @@ const GameRow = ({ item, index }) => {
         .ref("games")
         .child(currentUser.uid)
         .child(selectedGame.key)
-        .remove();
-
-      dispatch(deleteGame(selectedGame));
+        .update({ platinum: true });
+      dispatch(markGameAsUnplayed(selectedGame));
       dispatch(toggleIsLoadingGames(false));
     } catch (error) {
       console.log(error);
       dispatch(toggleIsLoadingGames(false));
     }
   };
+
+  // const markAsUnPlatinum = async (selectedGame, index) => {
+  //   try {
+  //     dispatch(toggleIsLoadingGames(true));
+  //     await firebase
+  //       .database()
+  //       .ref("games")
+  //       .child(currentUser.uid)
+  //       .child(selectedGame.key)
+  //       .update({ platinum: false });
+  //     dispatch(markGameAsUnplayed(selectedGame));
+  //     dispatch(toggleIsLoadingGames(false));
+  //   } catch (error) {
+  //     console.log(error);
+  //     dispatch(toggleIsLoadingGames(false));
+  //   }
+  // };
+
+  // const handleDeleteGame = async (selectedGame, index) => {
+  //   try {
+  //     dispatch(toggleIsLoadingGames(true));
+  //     await firebase
+  //       .database()
+  //       .ref("games")
+  //       .child(currentUser.uid)
+  //       .child(selectedGame.key)
+  //       .remove();
+
+  //     dispatch(deleteGame(selectedGame));
+  //     dispatch(toggleIsLoadingGames(false));
+  //   } catch (error) {
+  //     console.log(error);
+  //     dispatch(toggleIsLoadingGames(false));
+  //   }
+  // };
 
   const uploadImage = async (image, selectedGame) => {
     const ref = firebase
@@ -153,46 +187,46 @@ const GameRow = ({ item, index }) => {
 
   let swipeoutButtons = [
     {
-      text: "Delete",
+      text: "Mark Platinum",
       component: (
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <Ionicons name="ios-trash" size={24} color={colors.txtWhite} />
-        </View>
-      ),
-      backgroundColor: colors.bgDelete,
-      onPress: () => handleDeleteGame(item, index),
-    },
-  ];
-
-  if (!item.completed) {
-    swipeoutButtons.unshift({
-      text: "Mark Completed",
-      component: (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <Text style={{ color: colors.txtWhite }}>Mark As Completed</Text>
-        </View>
-      ),
-      backgroundColor: colors.bgSuccessDark,
-      onPress: () => markAsCompleted(item, index),
-    });
-  } else {
-    swipeoutButtons.unshift({
-      text: "Mark Unplayed",
-      component: (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <Text style={{ color: colors.txtWhite }}>Mark As Not Completed</Text>
+          <Text style={{ color: colors.txtWhite }}>100% Completed</Text>
         </View>
       ),
       backgroundColor: colors.bgUnread,
-      onPress: () => markAsUnplayed(item, index),
-    });
-  }
+      onPress: () => markAsPlatinum(item, index),
+    },
+  ];
+
+  // if (!item.platinum) {
+  //   swipeoutButtons.unshift({
+  //     text: "Mark Unplayed",
+  //     component: (
+  //       <View
+  //         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+  //       >
+  //         <Text style={{ color: colors.txtWhite }}>Mark As</Text>
+  //       </View>
+  //     ),
+  //     backgroundColor: colors.bgUnread,
+  //     onPress: () => markAsUnplayed(item, index),
+  //   });
+  // } else {
+  //   swipeoutButtons.unshift({
+  //     text: "Mark Unplayed",
+  //     component: (
+  //       <View
+  //         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+  //       >
+  //         <Text style={{ color: colors.txtWhite }}>Mark As Unplayed</Text>
+  //       </View>
+  //     ),
+  //     backgroundColor: colors.bgUnread,
+  //     onPress: () => markAsUnPlatinum(item, index),
+  //   });
+  // }
 
   return (
     <Swipeout
@@ -207,10 +241,10 @@ const GameRow = ({ item, index }) => {
         marginVertical={0}
         item={item}
       >
-        {item.completed && (
+        {item.platinum && (
           <Ionicons
             style={{ marginRight: 20 }}
-            name="logo-game-controller-a"
+            name="md-trophy"
             color={"#45CE30"}
             size={35}
           />

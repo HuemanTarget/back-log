@@ -16,7 +16,7 @@ import {
   toggleIsLoadingGames,
   deleteGame,
   markGameAsCompleted,
-  markGameAsUnplayed,
+  // markGameAsUnplayed,
   updateGameImage,
 } from "../redux/actions";
 
@@ -45,22 +45,22 @@ const GameRow = ({ item, index }) => {
     }
   };
 
-  const markAsUnplayed = async (selectedGame, index) => {
-    try {
-      dispatch(toggleIsLoadingGames(true));
-      await firebase
-        .database()
-        .ref("games")
-        .child(currentUser.uid)
-        .child(selectedGame.key)
-        .update({ completed: false });
-      dispatch(markGameAsUnplayed(selectedGame));
-      dispatch(toggleIsLoadingGames(false));
-    } catch (error) {
-      console.log(error);
-      dispatch(toggleIsLoadingGames(false));
-    }
-  };
+  // const markAsUnplayed = async (selectedGame, index) => {
+  //   try {
+  //     dispatch(toggleIsLoadingGames(true));
+  //     await firebase
+  //       .database()
+  //       .ref("games")
+  //       .child(currentUser.uid)
+  //       .child(selectedGame.key)
+  //       .update({ completed: false });
+  //     dispatch(markGameAsUnplayed(selectedGame));
+  //     dispatch(toggleIsLoadingGames(false));
+  //   } catch (error) {
+  //     console.log(error);
+  //     dispatch(toggleIsLoadingGames(false));
+  //   }
+  // };
 
   const handleDeleteGame = async (selectedGame, index) => {
     try {
@@ -153,21 +153,6 @@ const GameRow = ({ item, index }) => {
 
   let swipeoutButtons = [
     {
-      text: "Delete",
-      component: (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <Ionicons name="ios-trash" size={24} color={colors.txtWhite} />
-        </View>
-      ),
-      backgroundColor: colors.bgDelete,
-      onPress: () => handleDeleteGame(item, index),
-    },
-  ];
-
-  if (!item.completed) {
-    swipeoutButtons.unshift({
       text: "Mark Completed",
       component: (
         <View
@@ -178,21 +163,36 @@ const GameRow = ({ item, index }) => {
       ),
       backgroundColor: colors.bgSuccessDark,
       onPress: () => markAsCompleted(item, index),
-    });
-  } else {
-    swipeoutButtons.unshift({
-      text: "Mark Unplayed",
-      component: (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <Text style={{ color: colors.txtWhite }}>Mark As Not Completed</Text>
-        </View>
-      ),
-      backgroundColor: colors.bgUnread,
-      onPress: () => markAsUnplayed(item, index),
-    });
-  }
+    },
+  ];
+
+  // if (!item.completed) {
+  //   swipeoutButtons.unshift({
+  //     text: "Mark Completed",
+  //     component: (
+  //       <View
+  //         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+  //       >
+  //         <Text style={{ color: colors.txtWhite }}>Mark As Completed</Text>
+  //       </View>
+  //     ),
+  //     backgroundColor: colors.bgSuccessDark,
+  //     onPress: () => markAsCompleted(item, index),
+  //   });
+  // } else {
+  //   swipeoutButtons.unshift({
+  //     text: "Mark Completed",
+  //     component: (
+  //       <View
+  //         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+  //       >
+  //         <Text style={{ color: colors.txtWhite }}>Mark As Completed</Text>
+  //       </View>
+  //     ),
+  //     backgroundColor: colors.bgSuccessDark,
+  //     onPress: () => markAsCompleted(item, index),
+  //   });
+  // }
 
   return (
     <Swipeout
@@ -207,14 +207,14 @@ const GameRow = ({ item, index }) => {
         marginVertical={0}
         item={item}
       >
-        {item.completed && (
+        {/* {item.completed && (
           <Ionicons
             style={{ marginRight: 20 }}
             name="logo-game-controller-a"
             color={"#45CE30"}
             size={35}
           />
-        )}
+        )} */}
       </ListItem>
     </Swipeout>
   );

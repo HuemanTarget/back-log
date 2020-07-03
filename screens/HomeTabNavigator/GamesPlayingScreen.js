@@ -9,6 +9,7 @@ import {
 import colors from "../../assets/colors";
 import ListItem from "../../components/ListItem";
 import { useSelector } from "react-redux";
+import GameRowPlaying from "../../components/GameRowPlaying";
 
 const GamesPlayingScreen = () => {
   const { isLoadingGames, gamesPlaying } = useSelector((state) => state.games);
@@ -30,13 +31,15 @@ const GamesPlayingScreen = () => {
       )}
       <FlatList
         data={gamesPlaying}
-        renderItem={({ item }, index) => <ListItem item={item} index={index} />}
+        renderItem={({ item }, index) => (
+          <GameRowPlaying item={item} index={index} />
+        )}
         keyExtractor={(item, index) => index.toString()}
         ListEmptyComponent={
           !isLoadingGames && (
             <View style={{ marginTop: 50, alignItems: "center" }}>
-              <Text style={{ fontWeight: "bold", color: colors.txtWhite }}>
-                You Are Currently Not Playing Any Games
+              <Text style={{ fontWeight: "700", color: "white" }}>
+                No Games In Library
               </Text>
             </View>
           )

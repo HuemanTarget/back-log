@@ -74,9 +74,11 @@ const HomeScreen = () => {
           .ref("games")
           .child(user.uid)
           .child(key)
-          .set({ name: game, completed: false });
+          .set({ name: game, completed: false, platinum: false });
 
-        dispatch(addGame({ name: game, completed: false, key: key }));
+        dispatch(
+          addGame({ name: game, completed: false, platinum: false, key: key })
+        );
         setModalVisible(!modalVisible);
       }
     } catch (error) {
