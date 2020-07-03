@@ -4,9 +4,14 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../../assets/colors";
 import CustomActionButton from "../../components/CustomActionButton";
 import { useNavigation } from "@react-navigation/native";
+import { useFonts } from "@expo-google-fonts/dev";
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
+  let [fontsLoaded] = useFonts({
+    "Dead-Cert": require("../../assets/fonts/deadcrt.regular.ttf"),
+    "P-C": require("../../assets/fonts/pc-senior.regular.ttf"),
+  });
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.bgMain }}>
@@ -21,23 +26,34 @@ const WelcomeScreen = () => {
           name="logo-game-controller-b"
           size={150}
           color={colors.logoColor}
+          style={{ marginTop: 70 }}
         />
-        <Text style={{ fontSize: 50, fontWeight: "500", color: "white", marginBottom: 10 }}>
+        <Text
+          style={{
+            fontFamily: "Dead-Cert",
+            fontSize: 40,
+            fontWeight: "500",
+            color: "white",
+            marginBottom: 10,
+          }}
+        >
           Back Log
         </Text>
         <Text
           style={{
-            fontSize: 15,
+            fontFamily: "P-C",
+            fontSize: 12,
             fontWeight: "300",
             color: "white",
-            marginTop: 0,
+            marginTop: 20,
           }}
         >
           A Simple Place To Keep Track
         </Text>
         <Text
           style={{
-            fontSize: 15,
+            fontFamily: "P-C",
+            fontSize: 12,
             fontWeight: "300",
             color: "white",
             marginTop: 10,

@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Button,
 } from "react-native";
+import LoadingScreen from "./AppSwitchNavigator/LoadingScreen";
 import colors from "../assets/colors";
 import CustomActionButton from "../components/CustomActionButton";
 import * as firebase from "firebase/app";
@@ -17,7 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as Google from "expo-google-app-auth";
 
 const IOS_CLIENT_ID =
-  
+  "62153348249-vc5p4ntjbp5cnm6ata1al428gut1vosk.apps.googleusercontent.com";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -83,27 +84,32 @@ const LoginScreen = () => {
     }
   };
 
-  const signInWithGoogle = async () => {
-    try {
-      const result = await Google.logInAsync({
-        iosClientId: IOS_CLIENT_ID,
-        // androidClientId: ANDROID_CLIENT_ID,
-        scopes: ["profile", "email"],
-      });
+  // const signInWithGoogle = async () => {
+  //   try {
+  //     const result = await Google.logInAsync({
+  //       iosClientId: IOS_CLIENT_ID,
+  //       // androidClientId: ANDROID_CLIENT_ID,
+  //       scopes: ["profile", "email"],
+  //     });
 
-      if (result.type === "success") {
-        console.log("LoginScreen.js.js 21 | ", result.user.givenName);
-        // dispatch({ type: "SIGN_IN", payload: result.user });
-        //after Google login redirect to Profile
-        return result.accessToken;
-      } else {
-        return { cancelled: true };
-      }
-    } catch (e) {
-      console.log("LoginScreen.js.js 30 | Error with login", e);
-      return { error: true };
-    }
-  };
+  //     if (result.type === "success") {
+  //       console.log("LoginScreen.js.js 21 | ", result.user.givenName);
+  //       // dispatch({ type: "SIGN_IN", payload: result.user });
+  //       navigation.navigate("HomeScreen", {
+  //         screen: "HomeScreen",
+  //         params: { user: result.user.email },
+  //       });
+  //       // <LoadingScreen />;
+  //       //after Google login redirect to Profile
+  //       return result.accessToken;
+  //     } else {
+  //       return { cancelled: true };
+  //     }
+  //   } catch (e) {
+  //     console.log("LoginScreen.js.js 30 | Error with login", e);
+  //     return { error: true };
+  //   }
+  // };
 
   return (
     <View style={styles.container}>
@@ -158,7 +164,7 @@ const LoginScreen = () => {
               Sign In With Google
             </Text>
           </CustomActionButton> */}
-          <Button title="Sign In With Google" onPress={signInWithGoogle} />
+          {/* <Button title="Sign In With Google" onPress={signInWithGoogle} /> */}
         </View>
       </View>
       <View style={{ flex: 1 }} />

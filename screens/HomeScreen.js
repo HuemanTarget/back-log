@@ -7,6 +7,8 @@ import {
   TextInput,
   FlatList,
   ActivityIndicator,
+  Modal,
+  TouchableHighlight,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import CustomActionButton from "../components/CustomActionButton";
@@ -17,9 +19,12 @@ import "firebase/storage";
 import * as Animatable from "react-native-animatable";
 import GameRow from "../components/GameRow";
 import { loadGames, toggleIsLoadingGames, addGame } from "../redux/actions";
+import ActionButton from "react-native-action-button";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const HomeScreen = () => {
   const [textInputData, setTextInputData] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
   const textInputRef = useRef();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.currentUser);
@@ -72,6 +77,7 @@ const HomeScreen = () => {
           .set({ name: game, completed: false });
 
         dispatch(addGame({ name: game, completed: false, key: key }));
+        setModalVisible(!modalVisible);
       }
     } catch (error) {
       console.log(error);
@@ -97,7 +103,7 @@ const HomeScreen = () => {
             <ActivityIndicator size="large" color={colors.logoColor} />
           </View>
         )}
-        <View style={{ height: 50, flexDirection: "row", margin: 5 }}>
+        {/* <View style={{ height: 50, flexDirection: "row", margin: 5 }}>
           <TextInput
             onChangeText={(text) => setTextInputData(text)}
             style={{
@@ -108,13 +114,13 @@ const HomeScreen = () => {
               borderBottomWidth: 5,
               fontSize: 22,
               fontWeight: "200",
-              color: colors.txtWhite,
+              color: "white",
             }}
             placeholder="Enter Game Name"
             placeholderTextColor={colors.txtWhite}
             ref={textInputRef}
           />
-        </View>
+        </View> */}
 
         <FlatList
           data={games}
@@ -125,7 +131,7 @@ const HomeScreen = () => {
           ListEmptyComponent={
             !isLoadingGames && (
               <View style={{ marginTop: 50, alignItems: "center" }}>
-                <Text style={{ fontWeight: "bold", color: 'colors.txtWhite' }}>
+                <Text style={{ fontWeight: "700", color: "white" }}>
                   No Games In Library
                 </Text>
               </View>
@@ -133,7 +139,7 @@ const HomeScreen = () => {
           }
         />
 
-        <Animatable.View
+        {/* <Animatable.View
           animation={
             textInputData.length > 0 ? "slideInRight" : "slideOutRight"
           }
@@ -145,7 +151,63 @@ const HomeScreen = () => {
           >
             <Text style={{ color: "white", fontSize: 30 }}>+</Text>
           </CustomActionButton>
-        </Animatable.View>
+        </Animatable.View> */}
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <View style={{ height: 50, flexDirection: "row", margin: 5 }}>
+                  <TextInput
+                    onChangeText={(text) => setTextInputData(text)}
+                    style={{
+                      flex: 1,
+                      backgroundColor: "transparent",
+                      paddingLeft: 5,
+                      borderColor: colors.listItemBg,
+                      borderBottomWidth: 5,
+                      fontSize: 22,
+                      fontWeight: "200",
+                      color: "blue",
+                    }}
+                    placeholder="Enter Game Name"
+                    placeholderTextColor={"blue"}
+                    ref={textInputRef}
+                  />
+                </View>
+                {/* <Text style={styles.modalText}>Hello World!</Text> */}
+
+                <TouchableHighlight
+                  style={{
+                    ...styles.openButton,
+                    backgroundColor: colors.bgMain,
+                  }}
+                  onPress={() => handleAddGame(textInputData)}
+                >
+                  <Text style={styles.textStyle}>Add Game</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </Modal>
+        </View>
+        <ActionButton
+          buttonColor="rgba(231,76,60,1)"
+          onPress={() => setModalVisible(true)}
+        >
+          {/* <ActionButton.Item
+            buttonColor="#1abc9c"
+            title="Add Game"
+            onPress={() => handleAddGame(textInputData)}
+          >
+            <Icon name="md-done-all" style={styles.actionButtonIcon} />
+          </ActionButton.Item> */}
+        </ActionButton>
       </View>
       <SafeAreaView />
     </View>
@@ -171,5 +233,42 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     color: "white",
     fontSize: 50,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop: 15,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 15,
   },
 });

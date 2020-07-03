@@ -210,9 +210,9 @@ const GameRow = ({ item, index }) => {
         {item.completed && (
           <Ionicons
             style={{ marginRight: 20 }}
-            name="ios-checkmark"
+            name="logo-game-controller-a"
             color={"#45CE30"}
-            size={30}
+            size={35}
           />
         )}
       </ListItem>

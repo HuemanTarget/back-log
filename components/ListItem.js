@@ -2,10 +2,18 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import NetworkImage from "react-native-image-progress";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+import { useFonts } from "@expo-google-fonts/dev";
 
 import colors from "../assets/colors";
 
-const ListItem = ({ item, children, marginVertical, editable, onPress }) => (
+const ListItem = ({
+  item,
+  children,
+  marginVertical,
+  editable,
+  onPress,
+  fontsLoaded,
+}) => (
   <View
     style={{
       minHeight: 100,
@@ -43,8 +51,8 @@ const ListItem = ({ item, children, marginVertical, editable, onPress }) => (
           />
         ) : (
           <Image
-            source={require("../assets/icon.png")}
-            style={{ flex: 1, height: null, width: null, borderRadius: 35 }}
+            source={require("../assets/iconThree.png")}
+            style={{ flex: 1, height: null, width: null }}
           />
         )}
       </TouchableOpacity>
@@ -56,7 +64,14 @@ const ListItem = ({ item, children, marginVertical, editable, onPress }) => (
         paddingLeft: 5,
       }}
     >
-      <Text style={{ fontSize: 22, color: "#EAF0F1", fontWeight: 'bold', marginLeft: 10  }}>
+      <Text
+        style={{
+          fontSize: 22,
+          color: "#EAF0F1",
+          fontWeight: "bold",
+          marginLeft: 10,
+        }}
+      >
         {item.name}
       </Text>
     </View>
