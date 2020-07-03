@@ -24,8 +24,10 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 const HomeScreen = () => {
   const [textInputData, setTextInputData] = useState("");
+  const [systemInputData, setSystemInputData] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const textInputRef = useRef();
+  const systemInputRef = useRef();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.currentUser);
 
@@ -48,9 +50,11 @@ const HomeScreen = () => {
 
   const { isLoadingGames, games } = useSelector((state) => state.games);
 
-  const handleAddGame = async (game) => {
+  const handleAddGame = async (game, system) => {
     setTextInputData("");
+    setSystemInputData("");
     textInputRef.current.setNativeProps({ text: "" });
+    systemInputRef.current.setNativeProps({ text: "" });
     try {
       const snapshot = await firebase
         .database()
@@ -74,10 +78,21 @@ const HomeScreen = () => {
           .ref("games")
           .child(user.uid)
           .child(key)
-          .set({ name: game, completed: false, platinum: false });
+          .set({
+            name: game,
+            system: system,
+            completed: false,
+            platinum: false,
+          });
 
         dispatch(
-          addGame({ name: game, completed: false, platinum: false, key: key })
+          addGame({
+            name: game,
+            system: system,
+            completed: false,
+            platinum: false,
+            key: key,
+          })
         );
         setModalVisible(!modalVisible);
       }
@@ -183,6 +198,24 @@ const HomeScreen = () => {
                     ref={textInputRef}
                   />
                 </View>
+                <View style={{ height: 50, flexDirection: "row", margin: 5 }}>
+                  <TextInput
+                    onChangeText={(text) => setSystemInputData(text)}
+                    style={{
+                      flex: 1,
+                      backgroundColor: "transparent",
+                      paddingLeft: 5,
+                      borderColor: colors.listItemBg,
+                      borderBottomWidth: 5,
+                      fontSize: 22,
+                      fontWeight: "200",
+                      color: "blue",
+                    }}
+                    placeholder="Which System"
+                    placeholderTextColor={"blue"}
+                    ref={systemInputRef}
+                  />
+                </View>
                 {/* <Text style={styles.modalText}>Hello World!</Text> */}
 
                 <TouchableHighlight
@@ -190,7 +223,7 @@ const HomeScreen = () => {
                     ...styles.openButton,
                     backgroundColor: colors.bgMain,
                   }}
-                  onPress={() => handleAddGame(textInputData)}
+                  onPress={() => handleAddGame(textInputData, systemInputData)}
                 >
                   <Text style={styles.textStyle}>Add Game</Text>
                 </TouchableHighlight>

@@ -74,6 +74,16 @@ const ListItem = ({
       >
         {item.name}
       </Text>
+      <Text
+        style={{
+          fontSize: 12,
+          color: "#EAF0F1",
+          fontWeight: "bold",
+          marginLeft: 10,
+        }}
+      >
+        {item.system}
+      </Text>
     </View>
     {children}
   </View>

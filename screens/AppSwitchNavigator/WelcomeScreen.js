@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../assets/colors";
 import CustomActionButton from "../../components/CustomActionButton";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "@expo-google-fonts/dev";
+import * as Font from "expo-font";
+
+// let customFonts = useFonts({
+//   "Dead-Cert": require("../../assets/fonts/deadcrt.regular.ttf"),
+//   "P-C": require("../../assets/fonts/pc-senior.regular.ttf"),
+// });
 
 const WelcomeScreen = () => {
+  // const [fontsLoaded, setFontsLoaded] = useState(false);
   const navigation = useNavigation();
-  let [fontsLoaded] = useFonts({
-    "Dead-Cert": require("../../assets/fonts/deadcrt.regular.ttf"),
-    "P-C": require("../../assets/fonts/pc-senior.regular.ttf"),
-  });
+  // let [fontsLoaded] = useFonts({
+  //   "Dead-Cert": require("../../assets/fonts/deadcrt.regular.ttf"),
+  //   "P-C": require("../../assets/fonts/pc-senior.regular.ttf"),
+  // });
+  // const _loadFontsAsync = async () => {
+  //   await Font.loadAsync(customFonts);
+  //   setFontsLoaded(true);
+  // };
+
+  // _loadFontsAsync();
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.bgMain }}>
@@ -30,30 +43,30 @@ const WelcomeScreen = () => {
         />
         <Text
           style={{
-            fontFamily: "Dead-Cert",
-            fontSize: 40,
+            // fontFamily: "Dead-Cert",
+            fontSize: 60,
             fontWeight: "500",
             color: "white",
-            marginBottom: 10,
+            marginBottom: 5,
           }}
         >
           Back Log
         </Text>
         <Text
           style={{
-            fontFamily: "P-C",
-            fontSize: 12,
+            // fontFamily: "P-C",
+            fontSize: 20,
             fontWeight: "300",
             color: "white",
-            marginTop: 20,
+            marginTop: 10,
           }}
         >
           A Simple Place To Keep Track
         </Text>
         <Text
           style={{
-            fontFamily: "P-C",
-            fontSize: 12,
+            // fontFamily: "P-C",
+            fontSize: 20,
             fontWeight: "300",
             color: "white",
             marginTop: 10,

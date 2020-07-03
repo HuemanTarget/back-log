@@ -186,7 +186,7 @@ const GameRow = ({ item, index }) => {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <Text style={{ color: colors.txtWhite }}>Mark As Not Completed</Text>
+          <Text style={{ color: colors.txtWhite }}>Mark As Playing</Text>
         </View>
       ),
       backgroundColor: colors.bgUnread,

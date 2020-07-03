@@ -244,7 +244,7 @@ const GameRow = ({ item, index }) => {
         {item.platinum && (
           <Ionicons
             style={{ marginRight: 20 }}
-            name="md-trophy"
+            name="ios-trophy"
             color={"#45CE30"}
             size={35}
           />
