@@ -14,6 +14,8 @@ import "firebase/storage";
 
 import {
   toggleIsLoadingGames,
+  markGameAsPlatinum,
+  markGameAsNotPlatinum,
   deleteGame,
   markGameAsCompleted,
   // markGameAsUnplayed,
@@ -71,7 +73,24 @@ const GameRow = ({ item, index }) => {
         .child(currentUser.uid)
         .child(selectedGame.key)
         .update({ platinum: true });
-      dispatch(markGameAsUnplayed(selectedGame));
+      dispatch(markGameAsPlatinum(selectedGame));
+      dispatch(toggleIsLoadingGames(false));
+    } catch (error) {
+      console.log(error);
+      dispatch(toggleIsLoadingGames(false));
+    }
+  };
+
+  const markAsNotPlatinum = async (selectedGame, index) => {
+    try {
+      dispatch(toggleIsLoadingGames(true));
+      await firebase
+        .database()
+        .ref("games")
+        .child(currentUser.uid)
+        .child(selectedGame.key)
+        .update({ platinum: false });
+      dispatch(markGameAsNotPlatinum(selectedGame));
       dispatch(toggleIsLoadingGames(false));
     } catch (error) {
       console.log(error);
@@ -199,34 +218,6 @@ const GameRow = ({ item, index }) => {
       onPress: () => markAsPlatinum(item, index),
     },
   ];
-
-  // if (!item.platinum) {
-  //   swipeoutButtons.unshift({
-  //     text: "Mark Unplayed",
-  //     component: (
-  //       <View
-  //         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-  //       >
-  //         <Text style={{ color: colors.txtWhite }}>Mark As</Text>
-  //       </View>
-  //     ),
-  //     backgroundColor: colors.bgUnread,
-  //     onPress: () => markAsUnplayed(item, index),
-  //   });
-  // } else {
-  //   swipeoutButtons.unshift({
-  //     text: "Mark Unplayed",
-  //     component: (
-  //       <View
-  //         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-  //       >
-  //         <Text style={{ color: colors.txtWhite }}>Mark As Unplayed</Text>
-  //       </View>
-  //     ),
-  //     backgroundColor: colors.bgUnread,
-  //     onPress: () => markAsUnPlatinum(item, index),
-  //   });
-  // }
 
   return (
     <Swipeout

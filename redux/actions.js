@@ -35,6 +35,16 @@ export const markGameAsUnplayed = (game) => ({
   payload: game,
 });
 
+export const markGameAsPlatinum = (game) => ({
+  type: "MARK_GAME_AS_PLATINUM",
+  payload: game,
+});
+
+export const markGameAsNotPlatinum = (game) => ({
+  type: "MARK_GAME_AS_NOT_PLATINUM",
+  payload: game,
+});
+
 export const signOut = () => ({
   type: "SIGN_OUT",
 });

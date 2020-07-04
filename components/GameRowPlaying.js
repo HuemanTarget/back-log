@@ -166,34 +166,6 @@ const GameRow = ({ item, index }) => {
     },
   ];
 
-  // if (!item.completed) {
-  //   swipeoutButtons.unshift({
-  //     text: "Mark Completed",
-  //     component: (
-  //       <View
-  //         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-  //       >
-  //         <Text style={{ color: colors.txtWhite }}>Mark As Completed</Text>
-  //       </View>
-  //     ),
-  //     backgroundColor: colors.bgSuccessDark,
-  //     onPress: () => markAsCompleted(item, index),
-  //   });
-  // } else {
-  //   swipeoutButtons.unshift({
-  //     text: "Mark Completed",
-  //     component: (
-  //       <View
-  //         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-  //       >
-  //         <Text style={{ color: colors.txtWhite }}>Mark As Completed</Text>
-  //       </View>
-  //     ),
-  //     backgroundColor: colors.bgSuccessDark,
-  //     onPress: () => markAsCompleted(item, index),
-  //   });
-  // }
-
   return (
     <Swipeout
       autoClose={true}
