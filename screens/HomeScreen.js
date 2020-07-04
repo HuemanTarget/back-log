@@ -21,10 +21,11 @@ import GameRow from "../components/GameRow";
 import { loadGames, toggleIsLoadingGames, addGame } from "../redux/actions";
 import ActionButton from "react-native-action-button";
 import Icon from "react-native-vector-icons/Ionicons";
+import {Picker} from '@react-native-community/picker';
 
 const HomeScreen = () => {
   const [textInputData, setTextInputData] = useState("");
-  const [systemInputData, setSystemInputData] = useState("");
+  const [systemInputData, setSystemInputData] = useState("Xbox One");
   const [modalVisible, setModalVisible] = useState(false);
   const textInputRef = useRef();
   const systemInputRef = useRef();

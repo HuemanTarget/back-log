@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import Swipeout from "react-native-swipeout";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../assets/colors";
@@ -60,6 +60,20 @@ const GameRow = ({ item, index }) => {
       console.log(error);
       dispatch(toggleIsLoadingGames(false));
     }
+  };
+
+  const confirmDelete = () => {
+    Alert.alert("Delete Game", "Are You Sure You Want To Delete Game?", [
+      {
+        text: "Yes",
+        onPress: () => handleDeleteGame(item, index),
+      },
+      {
+        text: "No",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel",
+      },
+    ]);
   };
 
   const handleDeleteGame = async (selectedGame, index) => {
@@ -162,7 +176,7 @@ const GameRow = ({ item, index }) => {
         </View>
       ),
       backgroundColor: colors.bgDelete,
-      onPress: () => handleDeleteGame(item, index),
+      onPress: () => confirmDelete(),
     },
   ];
 
