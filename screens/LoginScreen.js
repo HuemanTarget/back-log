@@ -17,8 +17,7 @@ import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import * as Google from "expo-google-app-auth";
 
-const IOS_CLIENT_ID =
-  "62153348249-vc5p4ntjbp5cnm6ata1al428gut1vosk.apps.googleusercontent.com";
+
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
