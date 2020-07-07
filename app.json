@@ -17,7 +17,6 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "example.expo.googlesignin",
       "config": {
         "googleSignIn": {
           "reservedClientId": "com.googleusercontent.apps.62153348249-vc5p4ntjbp5cnm6ata1al428gut1vosk"

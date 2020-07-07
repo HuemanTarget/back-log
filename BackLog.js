@@ -5,6 +5,7 @@ import WelcomeScreen from "./screens/AppSwitchNavigator/WelcomeScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import LogoutScreen from "./screens/LogoutScreen";
+import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import GamesPlayingScreen from "./screens/HomeTabNavigator/GamesPlayingScreen";
 import GamesCompletedScreen from "./screens/HomeTabNavigator/GamesCompletedScreen";
 import CustomDrawerComponent from "./screens/DrawerNavigator/CustomDrawerComponent";
@@ -53,6 +54,11 @@ const BackLog = () => {
           <Stack.Screen
             name="LoginScreen"
             component={LoginScreen}
+            options={{ headerBackTitleVisible: false }}
+          />
+          <Stack.Screen
+            name="ForgotPasswordScreen"
+            component={ForgotPasswordScreen}
             options={{ headerBackTitleVisible: false }}
           />
         </Stack.Navigator>

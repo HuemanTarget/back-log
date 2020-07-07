@@ -16,3 +16,7 @@ web-report/
 config.js
 
 app.json
+
+.env
+
+

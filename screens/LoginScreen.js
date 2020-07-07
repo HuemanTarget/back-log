@@ -6,8 +6,10 @@ import {
   TextInput,
   ActivityIndicator,
   Button,
+  TouchableOpacity,
 } from "react-native";
 import LoadingScreen from "./AppSwitchNavigator/LoadingScreen";
+
 import colors from "../assets/colors";
 import CustomActionButton from "../components/CustomActionButton";
 import * as firebase from "firebase/app";
@@ -17,12 +19,17 @@ import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import * as Google from "expo-google-app-auth";
 
-
+import {
+  FACEBOOK_APP_ID,
+  ANDROID_CLIENT_ID,
+  IOS_CLIENT_ID,
+} from "react-native-dotenv";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassWord] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -82,6 +89,34 @@ const LoginScreen = () => {
       alert("Please enter email and password.");
     }
   };
+
+  // const signInWithGoogle = async () => {
+  //   try {
+  //     const result = await Google.logInAsync({
+  //       iosClientId: IOS_CLIENT_ID,
+  //       androidClientId: ANDROID_CLIENT_ID,
+  //       scopes: ["profile", "email"],
+  //     });
+  //     if (result.type === "success") {
+  //       // console.log("LoginScreen.js.js 21 | ", result.user);
+  //       setIsLoading(false);
+  //       const user = await firebase
+  //         .database()
+  //         .ref("users/")
+  //         .child(result.user.id)
+  //         .set({ email: result.user.email, uid: result.user.id });
+  //       // user.uid = result.user.email;
+  //       dispatch({ type: "SIGN_IN", payload: result.user });
+  //       // dispatch({ type: "GOOGLE_SIGN_IN", payload: result.user.id }); //after Google login redirect to Profile
+  //       return result.accessToken;
+  //     } else {
+  //       return { cancelled: true };
+  //     }
+  //   } catch (e) {
+  //     console.log("LoginScreen.js.js 30 | Error with login", e);
+  //     return { error: true };
+  //   }
+  // };
 
   // const signInWithGoogle = async () => {
   //   try {
@@ -155,15 +190,14 @@ const LoginScreen = () => {
           >
             <Text style={{ color: "white", fontWeight: "600" }}>Sign Up</Text>
           </CustomActionButton>
-          {/* <CustomActionButton
-            onPress={signInWithGoogleAsync}
+          <CustomActionButton
+            onPress={() => navigation.navigate("ForgotPasswordScreen")}
             style={[styles.loginButtons, { borderColor: colors.bgError }]}
           >
             <Text style={{ color: "white", fontWeight: "600" }}>
-              Sign In With Google
+              Forgot Password
             </Text>
-          </CustomActionButton> */}
-          {/* <Button title="Sign In With Google" onPress={signInWithGoogle} /> */}
+          </CustomActionButton>
         </View>
       </View>
       <View style={{ flex: 1 }} />

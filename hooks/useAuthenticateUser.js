@@ -12,6 +12,8 @@ const useAuthenticateUser = () => {
       unsubscribe = firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           dispatch({ type: "SIGN_IN", payload: user });
+        } else if(user){
+          dispatch({ type: "GOOGLE_SIGN_IN" });
         } else {
           dispatch({ type: "SIGN_OUT" });
         }

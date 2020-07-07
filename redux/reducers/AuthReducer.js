@@ -13,6 +13,13 @@ const auth = (state = initialState, action) => {
         currentUser: action.payload,
         isLoading: false,
       };
+    case "GOOGLE_SIGN_IN":
+      return {
+        ...state,
+        isSignedIn: true,
+        currentUser: action.payload,
+        isLoading: false,
+      };
     case "SIGN_OUT":
       return {
         ...state,
