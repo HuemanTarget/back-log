@@ -9,7 +9,7 @@ const FormButton = ({ title, buttonType, buttonColor, ...rest }) => (
     type={buttonType}
     title={title}
     buttonStyle={{ borderColor: "#aad1e6" }}
-    titleStyle={{ color: "white", fontWeight: "600" }}
+    titleStyle={{ color: colors.txtWhite }}
     style={styles.loginButtons}
   />
 );

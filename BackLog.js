@@ -54,12 +54,15 @@ const BackLog = () => {
           <Stack.Screen
             name="LoginScreen"
             component={LoginScreen}
-            options={{ headerBackTitleVisible: false }}
+            options={{ headerBackTitleVisible: false, title: "Login" }}
           />
           <Stack.Screen
             name="ForgotPasswordScreen"
             component={ForgotPasswordScreen}
-            options={{ headerBackTitleVisible: false }}
+            options={{
+              headerBackTitleVisible: false,
+              title: "Forgot Password",
+            }}
           />
         </Stack.Navigator>
       ) : (

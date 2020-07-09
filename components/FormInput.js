@@ -2,6 +2,7 @@ import React from "react";
 import { Input } from "react-native-elements";
 import { StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { color } from "react-native-reanimated";
 
 const FormInput = ({
   iconName,
@@ -20,7 +21,7 @@ const FormInput = ({
       placeholderTextColor="white"
       name={name}
       placeholder={placeholder}
-      style={styles.input}
+      inputStyle={{color: 'white'}}
     />
   </View>
 );
@@ -31,6 +32,9 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     marginRight: 10,
+  },
+  input: {
+    color: "white",
   },
 });
 
