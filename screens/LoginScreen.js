@@ -168,12 +168,14 @@ const LoginScreen = () => {
           placeholder="abc@example.com"
           placeholderTextColor="#b6b6b6"
           keyboardType="email-address"
+          autoCapitalize="none"
           onChangeText={(email) => setEmail(email)}
         />
         <TextInput
           style={styles.textInput}
           placeholder="enter password [8 letters - numbers long]"
           placeholderTextColor="#b6b6b6"
+          autoCapitalize="none"
           secureTextEntry
           onChangeText={(password) => setPassWord(password)}
         />
@@ -192,7 +194,7 @@ const LoginScreen = () => {
           </CustomActionButton>
           <CustomActionButton
             onPress={() => navigation.navigate("ForgotPasswordScreen")}
-            style={[styles.loginButtons, { borderColor: colors.bgError }]}
+            style={[styles.loginButtons, { borderColor: colors.logoColor }]}
           >
             <Text style={{ color: "white", fontWeight: "600" }}>
               Forgot Password

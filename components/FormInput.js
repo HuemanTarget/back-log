@@ -17,7 +17,7 @@ const FormInput = ({
       {...rest}
       leftIcon={<Ionicons name={iconName} size={28} color={iconColor} />}
       leftIconContainerStyle={styles.iconStyle}
-      placeholderTextColor="grey"
+      placeholderTextColor="white"
       name={name}
       placeholder={placeholder}
       style={styles.input}

@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import FormInput from "../components/FormInput";
 import FormButton from "../components/FormButton";
 import ErrorMessage from "../components/ErrorMessage";
+import CustomActionButton from "../components/CustomActionButton";
+import colors from "../assets/colors";
 
 import * as firebase from "firebase/app";
 import "firebase/auth";
@@ -34,8 +36,10 @@ class ForgotPasswordScreen extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.text}>Forgot Password?</Text>
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.bgMain }}>
+        <View>
+          <Text style={styles.text}>Forgot Password?</Text>
+        </View>
         <Formik
           initialValues={{ email: "" }}
           onSubmit={(values, actions) => {
@@ -60,12 +64,12 @@ class ForgotPasswordScreen extends Component {
                 onChangeText={handleChange("email")}
                 placeholder="Enter email"
                 autoCapitalize="none"
-                iconName="ios-mail"
-                iconColor="#2C384A"
                 onBlur={handleBlur("email")}
               />
               <ErrorMessage errorValue={touched.email && errors.email} />
-              <View style={styles.buttonContainer}>
+              <View
+                style={[styles.loginButtons, { borderColor: colors.bgPrimary }]}
+              >
                 <FormButton
                   buttonType="outline"
                   onPress={handleSubmit}
@@ -86,16 +90,39 @@ class ForgotPasswordScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    marginTop: 150,
+    backgroundColor: colors.bgMain,
+    // alignItems: "center",
+    // justifyContent: "center",
   },
   text: {
-    color: "#333",
+    color: "white",
     fontSize: 24,
     marginLeft: 25,
+    alignContent: "center",
+    justifyContent: "center",
+    marginTop: '40%',
+    marginLeft: '27%',
+  },
+  textInput: {
+    height: 50,
+    borderWidth: 0.5,
+    borderColor: colors.borderColor,
+    marginHorizontal: 40,
+    marginBottom: 10,
+    color: colors.txtWhite,
+    paddingHorizontal: 10,
   },
   buttonContainer: {
     margin: 25,
+  },
+  loginButtons: {
+    borderWidth: 0.5,
+    backgroundColor: "transparent",
+    marginTop: 10,
+    width: 200,
+    // borderRadius: 35,
+    marginLeft: '25%',
+    overflow: "hidden",
   },
 });
 
