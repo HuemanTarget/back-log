@@ -9,7 +9,7 @@ const colors = {
   logoColor: "#4BCFFA",
   bgMain: "#192A56",
   txtWhite: "#FFFFFF",
-  listItemBg: "#4834DF",
+  listItemBg: "#0A79DF",
   bgDelete: "#BA2F16",
   bgUnread: "#30336B",
   bgSuccessDark: "#019031",

@@ -99,7 +99,7 @@ const WelcomeScreen = () => {
           }}
           onPress={() => navigation.navigate("LoginScreen")}
         >
-          <Text style={{ fontWeight: "600", color: colors.txtWhite }}>
+          <Text style={{ fontFamily: "P-C", fontWeight: "600", color: colors.txtWhite }}>
             Login
           </Text>
         </CustomActionButton>

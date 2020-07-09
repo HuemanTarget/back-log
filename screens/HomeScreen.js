@@ -222,7 +222,7 @@ const HomeScreen = () => {
                 <TouchableHighlight
                   style={{
                     ...styles.openButton,
-                    backgroundColor: colors.bgMain,
+                    backgroundColor: colors.listItemBg,
                   }}
                   onPress={() => handleAddGame(textInputData, systemInputData)}
                 >

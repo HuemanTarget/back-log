@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import NetworkImage from "react-native-image-progress";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { useFonts } from "@expo-google-fonts/dev";
 import * as Font from "expo-font";
+import { AppLoading } from "expo";
 
 import colors from "../assets/colors";
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    "Dead-Cert": require("../assets/fonts/deadcrt.regular.ttf"),
+    "P-C": require("../assets/fonts/pc-senior.regular.ttf"),
+  });
+};
 
 const ListItem = ({
   item,
@@ -15,12 +23,16 @@ const ListItem = ({
   onPress,
   fontsLoaded,
 }) => {
-  const fetchFonts = () => {
-    return Font.loadAsync({
-      "Dead-Cert": require("../assets/fonts/deadcrt.regular.ttf"),
-      "P-C": require("../assets/fonts/pc-senior.regular.ttf"),
-    });
-  };
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  if (!dataLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setDataLoaded(true)}
+      />
+    );
+  }
 
   return (
     <View

@@ -18,6 +18,8 @@ import "firebase/database";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import * as Google from "expo-google-app-auth";
+import * as Font from "expo-font";
+import { AppLoading } from "expo";
 
 import {
   FACEBOOK_APP_ID,
@@ -25,11 +27,19 @@ import {
   IOS_CLIENT_ID,
 } from "react-native-dotenv";
 
+const fetchFonts = () => {
+  return Font.loadAsync({
+    "Dead-Cert": require("../assets/fonts/deadcrt.regular.ttf"),
+    "P-C": require("../assets/fonts/pc-senior.regular.ttf"),
+  });
+};
+
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassWord] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -145,6 +155,15 @@ const LoginScreen = () => {
   //   }
   // };
 
+  if (!dataLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setDataLoaded(true)}
+      />
+    );
+  }
+
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -184,19 +203,41 @@ const LoginScreen = () => {
             onPress={onSignIn}
             style={[styles.loginButtons, { borderColor: colors.bgPrimary }]}
           >
-            <Text style={{ color: colors.txtWhite, fontWeight: "600" }}>Login</Text>
+            <Text
+              style={{
+                fontFamily: "P-C",
+                color: colors.txtWhite,
+                fontWeight: "600",
+              }}
+            >
+              Login
+            </Text>
           </CustomActionButton>
           <CustomActionButton
             onPress={onSignUp}
             style={[styles.loginButtons, { borderColor: colors.bgError }]}
           >
-            <Text style={{ color: colors.txtWhite, fontWeight: "600" }}>Sign Up</Text>
+            <Text
+              style={{
+                fontFamily: "P-C",
+                color: colors.txtWhite,
+                fontWeight: "600",
+              }}
+            >
+              Sign Up
+            </Text>
           </CustomActionButton>
           <CustomActionButton
             onPress={() => navigation.navigate("ForgotPasswordScreen")}
             style={[styles.loginButtons, { borderColor: colors.logoColor }]}
           >
-            <Text style={{ color: colors.txtWhite, fontWeight: "600" }}>
+            <Text
+              style={{
+                fontFamily: "P-C",
+                color: colors.txtWhite,
+                fontWeight: "600",
+              }}
+            >
               Forgot Password
             </Text>
           </CustomActionButton>
