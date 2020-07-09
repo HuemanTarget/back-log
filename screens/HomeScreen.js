@@ -149,7 +149,7 @@ const HomeScreen = () => {
           ListEmptyComponent={
             !isLoadingGames && (
               <View style={{ marginTop: 50, alignItems: "center" }}>
-                <Text style={{ fontWeight: "700", color: "white" }}>
+                <Text style={{ fontWeight: "700", color: colors.txtWhite }}>
                   No Games In Library
                 </Text>
               </View>
@@ -267,12 +267,12 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     justifyContent: "center",
-    color: "white",
+    color: colors.txtWhite,
     fontSize: 50,
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: colors.txtWhite,
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   textStyle: {
-    color: "white",
+    color: colors.txtWhite,
     fontWeight: "bold",
     textAlign: "center",
   },

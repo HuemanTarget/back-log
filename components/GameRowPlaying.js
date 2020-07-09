@@ -20,7 +20,7 @@ import {
   updateGameImage,
 } from "../redux/actions";
 
-const GameRow = ({ item, index }) => {
+const GameRowPlaying = ({ item, index }) => {
   const dispatch = useDispatch();
 
   const currentUser = useSelector((state) => state.auth.currentUser);
@@ -192,4 +192,4 @@ const GameRow = ({ item, index }) => {
   );
 };
 
-export default GameRow;
+export default GameRowPlaying;

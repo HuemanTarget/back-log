@@ -43,7 +43,7 @@ const BackLog = () => {
             headerStyle: {
               backgroundColor: colors.bgMain,
             },
-            headerTintColor: "white",
+            headerTintColor: colors.txtWhite,
           }}
         >
           <Stack.Screen
@@ -129,13 +129,13 @@ const HomeStackNavigator = ({ navigation }) => (
   <Stack.Navigator
     screenOptions={{
       headerStyle: { backgroundColor: colors.bgMain },
-      headerTintColor: "white",
+      headerTintColor: colors.txtWhite,
       headerLeft: () => (
         <Ionicons
           onPress={() => navigation.openDrawer()}
           name="ios-menu"
           size={30}
-          color="white"
+          color={colors.txtWhite}
           style={{ marginLeft: 10 }}
         />
       ),

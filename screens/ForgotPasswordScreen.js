@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
   },
   text: {
-    color: "white",
+    color: colors.txtWhite,
     fontSize: 24,
     marginLeft: 25,
     alignContent: "center",

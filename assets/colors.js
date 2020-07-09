@@ -8,7 +8,7 @@ const colors = {
   borderColor: "#e9e9e9",
   logoColor: "#4BCFFA",
   bgMain: "#192A56",
-  txtWhite: "white",
+  txtWhite: "#FFFFFF",
   listItemBg: "#4834DF",
   bgDelete: "#BA2F16",
   bgUnread: "#30336B",

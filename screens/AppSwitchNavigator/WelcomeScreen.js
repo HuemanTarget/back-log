@@ -6,25 +6,32 @@ import CustomActionButton from "../../components/CustomActionButton";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "@expo-google-fonts/dev";
 import * as Font from "expo-font";
+import { AppLoading } from "expo";
 
-// let customFonts = useFonts({
+// const customFonts = useFonts({
 //   "Dead-Cert": require("../../assets/fonts/deadcrt.regular.ttf"),
 //   "P-C": require("../../assets/fonts/pc-senior.regular.ttf"),
 // });
 
-const WelcomeScreen = () => {
-  // const [fontsLoaded, setFontsLoaded] = useState(false);
-  const navigation = useNavigation();
-  // let [fontsLoaded] = useFonts({
-  //   "Dead-Cert": require("../../assets/fonts/deadcrt.regular.ttf"),
-  //   "P-C": require("../../assets/fonts/pc-senior.regular.ttf"),
-  // });
-  // const _loadFontsAsync = async () => {
-  //   await Font.loadAsync(customFonts);
-  //   setFontsLoaded(true);
-  // };
+const fetchFonts = () => {
+  return Font.loadAsync({
+    "Dead-Cert": require("../../assets/fonts/deadcrt.regular.ttf"),
+    "P-C": require("../../assets/fonts/pc-senior.regular.ttf"),
+  });
+};
 
-  // _loadFontsAsync();
+const WelcomeScreen = () => {
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const navigation = useNavigation();
+
+  if (!dataLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setDataLoaded(true)}
+      />
+    );
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.bgMain }}>
@@ -43,10 +50,10 @@ const WelcomeScreen = () => {
         />
         <Text
           style={{
-            // fontFamily: "Dead-Cert",
-            fontSize: 60,
+            fontFamily: "Dead-Cert",
+            fontSize: 35,
             fontWeight: "500",
-            color: "white",
+            color: colors.txtWhite,
             marginBottom: 5,
           }}
         >
@@ -54,21 +61,21 @@ const WelcomeScreen = () => {
         </Text>
         <Text
           style={{
-            // fontFamily: "P-C",
-            fontSize: 20,
+            fontFamily: "P-C",
+            fontSize: 12,
             fontWeight: "300",
-            color: "white",
-            marginTop: 10,
+            color: colors.txtWhite,
+            marginTop: 20,
           }}
         >
           A Simple Place To Keep Track
         </Text>
         <Text
           style={{
-            // fontFamily: "P-C",
-            fontSize: 20,
+            fontFamily: "P-C",
+            fontSize: 12,
             fontWeight: "300",
-            color: "white",
+            color: colors.txtWhite,
             marginTop: 10,
           }}
         >
@@ -92,7 +99,9 @@ const WelcomeScreen = () => {
           }}
           onPress={() => navigation.navigate("LoginScreen")}
         >
-          <Text style={{ fontWeight: "600", color: "white" }}>Login</Text>
+          <Text style={{ fontWeight: "600", color: colors.txtWhite }}>
+            Login
+          </Text>
         </CustomActionButton>
       </View>
     </View>

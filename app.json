@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "back-log",
+    "description": "A simple place to keep track of your video game library",
     "slug": "back-log",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
@@ -22,6 +23,9 @@
           "reservedClientId": "com.googleusercontent.apps.62153348249-vc5p4ntjbp5cnm6ata1al428gut1vosk"
         }
       }
+    },
+    "android": {
+      "package": "com.backlog.backlog"
     }
   }
 }

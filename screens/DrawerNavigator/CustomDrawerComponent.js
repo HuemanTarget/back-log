@@ -29,7 +29,7 @@ const CustomDrawerComponent = (props) => {
           size={100}
           color={colors.logoColor}
         />
-        <Text style={{ fontSize: 24, color: "white", fontWeight: "100" }}>
+        <Text style={{ fontSize: 24, color: colors.txtWhite, fontWeight: "100" }}>
           Back Log
         </Text>
       </View>

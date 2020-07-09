@@ -184,19 +184,19 @@ const LoginScreen = () => {
             onPress={onSignIn}
             style={[styles.loginButtons, { borderColor: colors.bgPrimary }]}
           >
-            <Text style={{ color: "white", fontWeight: "600" }}>Login</Text>
+            <Text style={{ color: colors.txtWhite, fontWeight: "600" }}>Login</Text>
           </CustomActionButton>
           <CustomActionButton
             onPress={onSignUp}
             style={[styles.loginButtons, { borderColor: colors.bgError }]}
           >
-            <Text style={{ color: "white", fontWeight: "600" }}>Sign Up</Text>
+            <Text style={{ color: colors.txtWhite, fontWeight: "600" }}>Sign Up</Text>
           </CustomActionButton>
           <CustomActionButton
             onPress={() => navigation.navigate("ForgotPasswordScreen")}
             style={[styles.loginButtons, { borderColor: colors.logoColor }]}
           >
-            <Text style={{ color: "white", fontWeight: "600" }}>
+            <Text style={{ color: colors.txtWhite, fontWeight: "600" }}>
               Forgot Password
             </Text>
           </CustomActionButton>

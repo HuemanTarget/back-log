@@ -38,8 +38,8 @@ const GamesPlayingScreen = () => {
         ListEmptyComponent={
           !isLoadingGames && (
             <View style={{ marginTop: 50, alignItems: "center" }}>
-              <Text style={{ fontWeight: "700", color: "white" }}>
-                No Games In Library
+              <Text style={{ fontWeight: "700", color: colors.txtWhite }}>
+                Not Currently Playing Any Games
               </Text>
             </View>
           )

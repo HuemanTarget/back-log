@@ -53,7 +53,7 @@ const GameRow = ({ item, index }) => {
         .ref("games")
         .child(currentUser.uid)
         .child(selectedGame.key)
-        .update({ completed: false });
+        .update({ completed: false, platinum: false });
       dispatch(markGameAsUnplayed(selectedGame));
       dispatch(toggleIsLoadingGames(false));
     } catch (error) {

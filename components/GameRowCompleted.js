@@ -22,7 +22,7 @@ import {
   updateGameImage,
 } from "../redux/actions";
 
-const GameRow = ({ item, index }) => {
+const GameRowCompleted = ({ item, index }) => {
   const dispatch = useDispatch();
 
   const currentUser = useSelector((state) => state.auth.currentUser);
@@ -47,22 +47,22 @@ const GameRow = ({ item, index }) => {
   //   }
   // };
 
-  const markAsUnplayed = async (selectedGame, index) => {
-    try {
-      dispatch(toggleIsLoadingGames(true));
-      await firebase
-        .database()
-        .ref("games")
-        .child(currentUser.uid)
-        .child(selectedGame.key)
-        .update({ completed: false });
-      dispatch(markGameAsUnplayed(selectedGame));
-      dispatch(toggleIsLoadingGames(false));
-    } catch (error) {
-      console.log(error);
-      dispatch(toggleIsLoadingGames(false));
-    }
-  };
+  // const markAsUnplayed = async (selectedGame, index) => {
+  //   try {
+  //     dispatch(toggleIsLoadingGames(true));
+  //     await firebase
+  //       .database()
+  //       .ref("games")
+  //       .child(currentUser.uid)
+  //       .child(selectedGame.key)
+  //       .update({ completed: false });
+  //     dispatch(markGameAsUnplayed(selectedGame));
+  //     dispatch(toggleIsLoadingGames(false));
+  //   } catch (error) {
+  //     console.log(error);
+  //     dispatch(toggleIsLoadingGames(false));
+  //   }
+  // };
 
   const markAsPlatinum = async (selectedGame, index) => {
     try {
@@ -73,6 +73,7 @@ const GameRow = ({ item, index }) => {
         .child(currentUser.uid)
         .child(selectedGame.key)
         .update({ platinum: true });
+
       dispatch(markGameAsPlatinum(selectedGame));
       dispatch(toggleIsLoadingGames(false));
     } catch (error) {
@@ -81,22 +82,22 @@ const GameRow = ({ item, index }) => {
     }
   };
 
-  const markAsNotPlatinum = async (selectedGame, index) => {
-    try {
-      dispatch(toggleIsLoadingGames(true));
-      await firebase
-        .database()
-        .ref("games")
-        .child(currentUser.uid)
-        .child(selectedGame.key)
-        .update({ platinum: false });
-      dispatch(markGameAsNotPlatinum(selectedGame));
-      dispatch(toggleIsLoadingGames(false));
-    } catch (error) {
-      console.log(error);
-      dispatch(toggleIsLoadingGames(false));
-    }
-  };
+  // const markAsNotPlatinum = async (selectedGame, index) => {
+  //   try {
+  //     dispatch(toggleIsLoadingGames(true));
+  //     await firebase
+  //       .database()
+  //       .ref("games")
+  //       .child(currentUser.uid)
+  //       .child(selectedGame.key)
+  //       .update({ platinum: false });
+  //     dispatch(markGameAsNotPlatinum(selectedGame));
+  //     dispatch(toggleIsLoadingGames(false));
+  //   } catch (error) {
+  //     console.log(error);
+  //     dispatch(toggleIsLoadingGames(false));
+  //   }
+  // };
 
   // const markAsUnPlatinum = async (selectedGame, index) => {
   //   try {
@@ -245,4 +246,4 @@ const GameRow = ({ item, index }) => {
   );
 };
 
-export default GameRow;
+export default GameRowCompleted;

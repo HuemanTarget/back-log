@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "react-native-elements";
+import { Input, colors } from "react-native-elements";
 import { StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { color } from "react-native-reanimated";
@@ -18,10 +18,10 @@ const FormInput = ({
       {...rest}
       leftIcon={<Ionicons name={iconName} size={28} color={iconColor} />}
       leftIconContainerStyle={styles.iconStyle}
-      placeholderTextColor="white"
+      placeholderTextColor={colors.txtWhite}
       name={name}
       placeholder={placeholder}
-      inputStyle={{color: 'white'}}
+      inputStyle={{color: colors.txtWhite}}
     />
   </View>
 );
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   input: {
-    color: "white",
+    color: colors.txtWhite,
   },
 });
 
