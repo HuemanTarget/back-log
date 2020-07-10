@@ -11,17 +11,13 @@ import {
   TouchableHighlight,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import CustomActionButton from "../components/CustomActionButton";
 import { snapshotToArray } from "../helpers/firebaseHelpers";
 import colors from "../assets/colors";
 import * as firebase from "firebase/app";
 import "firebase/storage";
-import * as Animatable from "react-native-animatable";
 import GameRow from "../components/GameRow";
 import { loadGames, toggleIsLoadingGames, addGame } from "../redux/actions";
 import ActionButton from "react-native-action-button";
-import Icon from "react-native-vector-icons/Ionicons";
-import { Picker } from "@react-native-community/picker";
 
 const HomeScreen = () => {
   const [textInputData, setTextInputData] = useState("");
@@ -121,24 +117,6 @@ const HomeScreen = () => {
             <ActivityIndicator size="large" color={colors.logoColor} />
           </View>
         )}
-        {/* <View style={{ height: 50, flexDirection: "row", margin: 5 }}>
-          <TextInput
-            onChangeText={(text) => setTextInputData(text)}
-            style={{
-              flex: 1,
-              backgroundColor: "transparent",
-              paddingLeft: 5,
-              borderColor: colors.listItemBg,
-              borderBottomWidth: 5,
-              fontSize: 22,
-              fontWeight: "200",
-              color: "white",
-            }}
-            placeholder="Enter Game Name"
-            placeholderTextColor={colors.txtWhite}
-            ref={textInputRef}
-          />
-        </View> */}
 
         <FlatList
           data={games}
@@ -157,19 +135,6 @@ const HomeScreen = () => {
           }
         />
 
-        {/* <Animatable.View
-          animation={
-            textInputData.length > 0 ? "slideInRight" : "slideOutRight"
-          }
-        >
-          <CustomActionButton
-            position="right"
-            style={{ backgroundColor: colors.bgPrimary, borderRadius: 25 }}
-            onPress={() => handleAddGame(textInputData)}
-          >
-            <Text style={{ color: "white", fontSize: 30 }}>+</Text>
-          </CustomActionButton>
-        </Animatable.View> */}
         <View style={styles.centeredView}>
           <Modal
             animationType="slide"
@@ -217,7 +182,6 @@ const HomeScreen = () => {
                     ref={systemInputRef}
                   />
                 </View>
-                {/* <Text style={styles.modalText}>Hello World!</Text> */}
 
                 <TouchableHighlight
                   style={{
@@ -235,15 +199,7 @@ const HomeScreen = () => {
         <ActionButton
           buttonColor="rgba(231,76,60,1)"
           onPress={() => setModalVisible(true)}
-        >
-          {/* <ActionButton.Item
-            buttonColor="#1abc9c"
-            title="Add Game"
-            onPress={() => handleAddGame(textInputData)}
-          >
-            <Icon name="md-done-all" style={styles.actionButtonIcon} />
-          </ActionButton.Item> */}
-        </ActionButton>
+        ></ActionButton>
       </View>
       <SafeAreaView />
     </View>

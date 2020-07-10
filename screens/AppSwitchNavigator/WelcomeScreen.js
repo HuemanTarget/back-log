@@ -4,14 +4,8 @@ import { Ionicons } from "@expo/vector-icons";
 import colors from "../../assets/colors";
 import CustomActionButton from "../../components/CustomActionButton";
 import { useNavigation } from "@react-navigation/native";
-import { useFonts } from "@expo-google-fonts/dev";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
-
-// const customFonts = useFonts({
-//   "Dead-Cert": require("../../assets/fonts/deadcrt.regular.ttf"),
-//   "P-C": require("../../assets/fonts/pc-senior.regular.ttf"),
-// });
 
 const fetchFonts = () => {
   return Font.loadAsync({

@@ -1,8 +1,8 @@
 import React from "react";
-import { Input, colors } from "react-native-elements";
+import { Input } from "react-native-elements";
 import { StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { color } from "react-native-reanimated";
+import colors from "../assets/colors";
 
 const FormInput = ({
   iconName,

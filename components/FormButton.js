@@ -1,9 +1,11 @@
 import React from "react";
 import { Button } from "react-native-elements";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import colors from "../assets/colors";
 
+
 const FormButton = ({ title, buttonType, buttonColor, ...rest }) => (
+  
   <Button
     {...rest}
     type={buttonType}

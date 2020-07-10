@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
 import Swipeout from "react-native-swipeout";
-import { Ionicons } from "@expo/vector-icons";
 import colors from "../assets/colors";
 import * as ImageHelpers from "../helpers/ImageHelpers";
 import ListItem from "./ListItem";
@@ -16,7 +15,6 @@ import {
   toggleIsLoadingGames,
   deleteGame,
   markGameAsCompleted,
-  // markGameAsUnplayed,
   updateGameImage,
 } from "../redux/actions";
 
@@ -38,41 +36,6 @@ const GameRowPlaying = ({ item, index }) => {
         .update({ completed: true });
 
       dispatch(markGameAsCompleted(selectedGame));
-      dispatch(toggleIsLoadingGames(false));
-    } catch (error) {
-      console.log(error);
-      dispatch(toggleIsLoadingGames(false));
-    }
-  };
-
-  // const markAsUnplayed = async (selectedGame, index) => {
-  //   try {
-  //     dispatch(toggleIsLoadingGames(true));
-  //     await firebase
-  //       .database()
-  //       .ref("games")
-  //       .child(currentUser.uid)
-  //       .child(selectedGame.key)
-  //       .update({ completed: false });
-  //     dispatch(markGameAsUnplayed(selectedGame));
-  //     dispatch(toggleIsLoadingGames(false));
-  //   } catch (error) {
-  //     console.log(error);
-  //     dispatch(toggleIsLoadingGames(false));
-  //   }
-  // };
-
-  const handleDeleteGame = async (selectedGame, index) => {
-    try {
-      dispatch(toggleIsLoadingGames(true));
-      await firebase
-        .database()
-        .ref("games")
-        .child(currentUser.uid)
-        .child(selectedGame.key)
-        .remove();
-
-      dispatch(deleteGame(selectedGame));
       dispatch(toggleIsLoadingGames(false));
     } catch (error) {
       console.log(error);
@@ -178,16 +141,7 @@ const GameRowPlaying = ({ item, index }) => {
         onPress={() => addGameImage(item)}
         marginVertical={0}
         item={item}
-      >
-        {/* {item.completed && (
-          <Ionicons
-            style={{ marginRight: 20 }}
-            name="logo-game-controller-a"
-            color={"#45CE30"}
-            size={35}
-          />
-        )} */}
-      </ListItem>
+      ></ListItem>
     </Swipeout>
   );
 };

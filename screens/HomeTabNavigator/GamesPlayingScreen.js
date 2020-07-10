@@ -7,7 +7,6 @@ import {
   ActivityIndicator,
 } from "react-native";
 import colors from "../../assets/colors";
-import ListItem from "../../components/ListItem";
 import { useSelector } from "react-redux";
 import GameRowPlaying from "../../components/GameRowPlaying";
 

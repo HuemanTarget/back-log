@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import NetworkImage from "react-native-image-progress";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
-import { useFonts } from "@expo-google-fonts/dev";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 

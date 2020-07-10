@@ -15,10 +15,6 @@ import "firebase/storage";
 import {
   toggleIsLoadingGames,
   markGameAsPlatinum,
-  markGameAsNotPlatinum,
-  deleteGame,
-  markGameAsCompleted,
-  // markGameAsUnplayed,
   updateGameImage,
 } from "../redux/actions";
 
@@ -28,41 +24,6 @@ const GameRowCompleted = ({ item, index }) => {
   const currentUser = useSelector((state) => state.auth.currentUser);
 
   const { showActionSheetWithOptions } = useActionSheet();
-
-  // const markAsCompleted = async (selectedGame, index) => {
-  //   try {
-  //     dispatch(toggleIsLoadingGames(true));
-  //     await firebase
-  //       .database()
-  //       .ref("games")
-  //       .child(currentUser.uid)
-  //       .child(selectedGame.key)
-  //       .update({ completed: true });
-
-  //     dispatch(markGameAsCompleted(selectedGame));
-  //     dispatch(toggleIsLoadingGames(false));
-  //   } catch (error) {
-  //     console.log(error);
-  //     dispatch(toggleIsLoadingGames(false));
-  //   }
-  // };
-
-  // const markAsUnplayed = async (selectedGame, index) => {
-  //   try {
-  //     dispatch(toggleIsLoadingGames(true));
-  //     await firebase
-  //       .database()
-  //       .ref("games")
-  //       .child(currentUser.uid)
-  //       .child(selectedGame.key)
-  //       .update({ completed: false });
-  //     dispatch(markGameAsUnplayed(selectedGame));
-  //     dispatch(toggleIsLoadingGames(false));
-  //   } catch (error) {
-  //     console.log(error);
-  //     dispatch(toggleIsLoadingGames(false));
-  //   }
-  // };
 
   const markAsPlatinum = async (selectedGame, index) => {
     try {
@@ -81,58 +42,6 @@ const GameRowCompleted = ({ item, index }) => {
       dispatch(toggleIsLoadingGames(false));
     }
   };
-
-  // const markAsNotPlatinum = async (selectedGame, index) => {
-  //   try {
-  //     dispatch(toggleIsLoadingGames(true));
-  //     await firebase
-  //       .database()
-  //       .ref("games")
-  //       .child(currentUser.uid)
-  //       .child(selectedGame.key)
-  //       .update({ platinum: false });
-  //     dispatch(markGameAsNotPlatinum(selectedGame));
-  //     dispatch(toggleIsLoadingGames(false));
-  //   } catch (error) {
-  //     console.log(error);
-  //     dispatch(toggleIsLoadingGames(false));
-  //   }
-  // };
-
-  // const markAsUnPlatinum = async (selectedGame, index) => {
-  //   try {
-  //     dispatch(toggleIsLoadingGames(true));
-  //     await firebase
-  //       .database()
-  //       .ref("games")
-  //       .child(currentUser.uid)
-  //       .child(selectedGame.key)
-  //       .update({ platinum: false });
-  //     dispatch(markGameAsUnplayed(selectedGame));
-  //     dispatch(toggleIsLoadingGames(false));
-  //   } catch (error) {
-  //     console.log(error);
-  //     dispatch(toggleIsLoadingGames(false));
-  //   }
-  // };
-
-  // const handleDeleteGame = async (selectedGame, index) => {
-  //   try {
-  //     dispatch(toggleIsLoadingGames(true));
-  //     await firebase
-  //       .database()
-  //       .ref("games")
-  //       .child(currentUser.uid)
-  //       .child(selectedGame.key)
-  //       .remove();
-
-  //     dispatch(deleteGame(selectedGame));
-  //     dispatch(toggleIsLoadingGames(false));
-  //   } catch (error) {
-  //     console.log(error);
-  //     dispatch(toggleIsLoadingGames(false));
-  //   }
-  // };
 
   const uploadImage = async (image, selectedGame) => {
     const ref = firebase

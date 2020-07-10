@@ -5,10 +5,7 @@ import * as Yup from "yup";
 import FormInput from "../components/FormInput";
 import FormButton from "../components/FormButton";
 import ErrorMessage from "../components/ErrorMessage";
-import CustomActionButton from "../components/CustomActionButton";
 import colors from "../assets/colors";
-import * as Font from "expo-font";
-import { AppLoading } from "expo";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
@@ -20,15 +17,7 @@ const validationSchema = Yup.object().shape({
     .required("Please enter a registered email"),
 });
 
-const fetchFonts = () => {
-  return Font.loadAsync({
-    "Dead-Cert": require("../assets/fonts/deadcrt.regular.ttf"),
-    "P-C": require("../assets/fonts/pc-senior.regular.ttf"),
-  });
-};
-
 class ForgotPasswordScreen extends Component {
-  
   handlePasswordReset = async (values, actions) => {
     const { email } = values;
 
@@ -42,8 +31,6 @@ class ForgotPasswordScreen extends Component {
       console.log(e);
     });
   };
-
-  fetchFonts()
 
   render() {
     return (
@@ -102,18 +89,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.bgMain,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   text: {
-    fontFamily: "P-C",
     color: colors.txtWhite,
     fontSize: 24,
     marginLeft: 25,
     alignContent: "center",
     justifyContent: "center",
-    marginTop: '40%',
-    marginLeft: '27%',
+    marginTop: "40%",
+    marginLeft: "27%",
   },
   textInput: {
     height: 50,
@@ -132,8 +116,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     marginTop: 10,
     width: 200,
-    // borderRadius: 35,
-    marginLeft: '25%',
+    marginLeft: "25%",
     overflow: "hidden",
   },
 });

@@ -8,57 +8,12 @@ import {
 } from "react-native";
 import { useSelector } from "react-redux";
 import colors from "../../assets/colors";
-import ListItem from "../../components/ListItem";
-import { Ionicons } from "@expo/vector-icons";
 import GameRowCompleted from "../../components/GameRowCompleted";
 
 const GamesCompletedScreen = () => {
   const { isLoadingGames, gamesCompleted } = useSelector(
     (state) => state.games
   );
-
-  let swipeoutButtons = [
-    {
-      text: "Delete",
-      component: (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <Ionicons name="ios-trash" size={24} color={colors.txtWhite} />
-        </View>
-      ),
-      backgroundColor: colors.bgDelete,
-      // onPress: () => handleDeleteGame(item, index),
-    },
-  ];
-
-  // if (!item.completed) {
-  //   swipeoutButtons.unshift({
-  //     text: "Mark Completed",
-  //     component: (
-  //       <View
-  //         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-  //       >
-  //         <Text style={{ color: colors.txtWhite }}>Mark As Completed</Text>
-  //       </View>
-  //     ),
-  //     backgroundColor: colors.bgSuccessDark,
-  //     // onPress: () => markAsCompleted(item, index),
-  //   });
-  // } else {
-  //   swipeoutButtons.unshift({
-  //     text: "Mark Unplayed",
-  //     component: (
-  //       <View
-  //         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-  //       >
-  //         <Text style={{ color: colors.txtWhite }}>Mark As Unplayed</Text>
-  //       </View>
-  //     ),
-  //     backgroundColor: colors.bgUnread,
-  //     // onPress: () => markAsUnplayed(item, index),
-  //   });
-  // }
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.bgMain }}>

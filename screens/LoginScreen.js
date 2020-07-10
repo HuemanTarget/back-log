@@ -5,10 +5,7 @@ import {
   StyleSheet,
   TextInput,
   ActivityIndicator,
-  Button,
-  TouchableOpacity,
 } from "react-native";
-import LoadingScreen from "./AppSwitchNavigator/LoadingScreen";
 
 import colors from "../assets/colors";
 import CustomActionButton from "../components/CustomActionButton";
@@ -17,15 +14,8 @@ import "firebase/auth";
 import "firebase/database";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import * as Google from "expo-google-app-auth";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
-
-import {
-  FACEBOOK_APP_ID,
-  ANDROID_CLIENT_ID,
-  IOS_CLIENT_ID,
-} from "react-native-dotenv";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -38,7 +28,6 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassWord] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(false);
   const [dataLoaded, setDataLoaded] = useState(false);
 
   const navigation = useNavigation();
@@ -99,61 +88,6 @@ const LoginScreen = () => {
       alert("Please enter email and password.");
     }
   };
-
-  // const signInWithGoogle = async () => {
-  //   try {
-  //     const result = await Google.logInAsync({
-  //       iosClientId: IOS_CLIENT_ID,
-  //       androidClientId: ANDROID_CLIENT_ID,
-  //       scopes: ["profile", "email"],
-  //     });
-  //     if (result.type === "success") {
-  //       // console.log("LoginScreen.js.js 21 | ", result.user);
-  //       setIsLoading(false);
-  //       const user = await firebase
-  //         .database()
-  //         .ref("users/")
-  //         .child(result.user.id)
-  //         .set({ email: result.user.email, uid: result.user.id });
-  //       // user.uid = result.user.email;
-  //       dispatch({ type: "SIGN_IN", payload: result.user });
-  //       // dispatch({ type: "GOOGLE_SIGN_IN", payload: result.user.id }); //after Google login redirect to Profile
-  //       return result.accessToken;
-  //     } else {
-  //       return { cancelled: true };
-  //     }
-  //   } catch (e) {
-  //     console.log("LoginScreen.js.js 30 | Error with login", e);
-  //     return { error: true };
-  //   }
-  // };
-
-  // const signInWithGoogle = async () => {
-  //   try {
-  //     const result = await Google.logInAsync({
-  //       iosClientId: IOS_CLIENT_ID,
-  //       // androidClientId: ANDROID_CLIENT_ID,
-  //       scopes: ["profile", "email"],
-  //     });
-
-  //     if (result.type === "success") {
-  //       console.log("LoginScreen.js.js 21 | ", result.user.givenName);
-  //       // dispatch({ type: "SIGN_IN", payload: result.user });
-  //       navigation.navigate("HomeScreen", {
-  //         screen: "HomeScreen",
-  //         params: { user: result.user.email },
-  //       });
-  //       // <LoadingScreen />;
-  //       //after Google login redirect to Profile
-  //       return result.accessToken;
-  //     } else {
-  //       return { cancelled: true };
-  //     }
-  //   } catch (e) {
-  //     console.log("LoginScreen.js.js 30 | Error with login", e);
-  //     return { error: true };
-  //   }
-  // };
 
   if (!dataLoaded) {
     return (
