@@ -3,12 +3,13 @@
     "name": "back-log",
     "description": "A simple place to keep track of your video game library",
     "slug": "back-log",
-    "platforms": ["ios", "android", "web"],
+    "privacy": "public",
+    "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash.json",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,11 +19,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "config": {
-        "googleSignIn": {
-          "reservedClientId": "com.googleusercontent.apps.62153348249-vc5p4ntjbp5cnm6ata1al428gut1vosk"
-        }
-      }
+      "bundleIdentifier": "com.pompouscatstudios.backlog"
     },
     "android": {
       "package": "com.backlog.backlog"
