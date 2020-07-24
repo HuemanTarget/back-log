@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Modal,
   TouchableHighlight,
+  Picker,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { snapshotToArray } from "../helpers/firebaseHelpers";
@@ -18,6 +19,7 @@ import "firebase/storage";
 import GameRow from "../components/GameRow";
 import { loadGames, toggleIsLoadingGames, addGame } from "../redux/actions";
 import ActionButton from "react-native-action-button";
+import { Dropdown } from "react-native-material-dropdown";
 
 const HomeScreen = () => {
   const [textInputData, setTextInputData] = useState("");
@@ -27,6 +29,18 @@ const HomeScreen = () => {
   const systemInputRef = useRef();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.currentUser);
+
+  let data = [
+    {
+      value: "Banana",
+    },
+    {
+      value: "Mango",
+    },
+    {
+      value: "Pear",
+    },
+  ];
 
   useEffect(() => {
     const fetchGames = async () => {
