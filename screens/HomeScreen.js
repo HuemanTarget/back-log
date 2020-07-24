@@ -21,7 +21,7 @@ import ActionButton from "react-native-action-button";
 
 const HomeScreen = () => {
   const [textInputData, setTextInputData] = useState("");
-  const [systemInputData, setSystemInputData] = useState("Xbox One");
+  const [systemInputData, setSystemInputData] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const textInputRef = useRef();
   const systemInputRef = useRef();
@@ -48,54 +48,58 @@ const HomeScreen = () => {
   const { isLoadingGames, games } = useSelector((state) => state.games);
 
   const handleAddGame = async (game, system) => {
-    setTextInputData("");
-    setSystemInputData("");
-    textInputRef.current.setNativeProps({ text: "" });
-    systemInputRef.current.setNativeProps({ text: "" });
-    try {
-      const snapshot = await firebase
-        .database()
-        .ref("games")
-        .child(user.uid)
-        .orderByChild("name")
-        .equalTo(game)
-        .once("value");
-
-      if (snapshot.exists()) {
-        alert("Unable to add. Game already exists.");
-      } else {
-        const key = await firebase
+    if (game && system) {
+      setTextInputData("");
+      setSystemInputData("");
+      textInputRef.current.setNativeProps({ text: "" });
+      systemInputRef.current.setNativeProps({ text: "" });
+      try {
+        const snapshot = await firebase
           .database()
           .ref("games")
           .child(user.uid)
-          .push().key;
+          .orderByChild("name")
+          .equalTo(game)
+          .once("value");
 
-        const response = await firebase
-          .database()
-          .ref("games")
-          .child(user.uid)
-          .child(key)
-          .set({
-            name: game,
-            system: system,
-            completed: false,
-            platinum: false,
-          });
+        if (snapshot.exists()) {
+          alert("Unable to add. Game already exists.");
+        } else {
+          const key = await firebase
+            .database()
+            .ref("games")
+            .child(user.uid)
+            .push().key;
 
-        dispatch(
-          addGame({
-            name: game,
-            system: system,
-            completed: false,
-            platinum: false,
-            key: key,
-          })
-        );
-        setModalVisible(!modalVisible);
+          const response = await firebase
+            .database()
+            .ref("games")
+            .child(user.uid)
+            .child(key)
+            .set({
+              name: game,
+              system: system,
+              completed: false,
+              platinum: false,
+            });
+
+          dispatch(
+            addGame({
+              name: game,
+              system: system,
+              completed: false,
+              platinum: false,
+              key: key,
+            })
+          );
+          setModalVisible(!modalVisible);
+        }
+      } catch (error) {
+        console.log(error);
+        dispatch(isLoadingGames(false));
       }
-    } catch (error) {
-      console.log(error);
-      dispatch(isLoadingGames(false));
+    } else {
+      alert("Please Enter A Game And System.");
     }
   };
 
@@ -182,16 +186,33 @@ const HomeScreen = () => {
                     ref={systemInputRef}
                   />
                 </View>
-
-                <TouchableHighlight
+                <View
                   style={{
-                    ...styles.openButton,
-                    backgroundColor: colors.listItemBg,
+                    flexDirection: "row",
                   }}
-                  onPress={() => handleAddGame(textInputData, systemInputData)}
                 >
-                  <Text style={styles.textStyle}>Add Game</Text>
-                </TouchableHighlight>
+                  <TouchableHighlight
+                    style={{
+                      ...styles.openButton,
+                      backgroundColor: colors.listItemBg,
+                    }}
+                    onPress={() =>
+                      handleAddGame(textInputData, systemInputData)
+                    }
+                  >
+                    <Text style={styles.textStyle}>Add Game</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight
+                    style={{
+                      ...styles.openButton,
+                      backgroundColor: colors.bgDelete,
+                      marginLeft: 15,
+                    }}
+                    onPress={() => setModalVisible(false)}
+                  >
+                    <Text style={styles.textStyle}>Cancel</Text>
+                  </TouchableHighlight>
+                </View>
               </View>
             </View>
           </Modal>
