@@ -5,7 +5,7 @@
     "slug": "back-log",
     "privacy": "public",
     "platforms": ["ios", "android"],
-    "version": "1.0.0",
+    "version": "1.1.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,7 +19,11 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.pompouscatstudios.backlog"
+      "bundleIdentifier": "com.pompouscatstudios.backlog",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Enable Back Log to access your camera to take pictures and upload your video game box art.",
+        "NSPhotoLibraryUsageDescription": "Enable Back Log to access your camera roll to upload your video game box art and save it online."
+      }
     },
     "android": {
       "package": "com.backlog.backlog"
